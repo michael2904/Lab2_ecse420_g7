@@ -22,10 +22,10 @@ if rank == 0:
 	width, height = image.size
 	pixels = list(image.getdata())
 	for i in range(len(pixels)):
-	pixels[i] = list(pixels[i])
-	chunks = [[] for _ in range(size)]
+		pixels[i] = list(pixels[i])
+		chunks = [[] for _ in range(size)]
 	for i, chunk in enumerate(pixels):
-	chunks[i % size].append(chunk)
+		chunks[i % size].append(chunk)
 else:
 	pixels = []
 	chunks = None
@@ -40,6 +40,7 @@ result = [(
 	255
 	) for pixel in result]
 
+
 # Gather separate pixels to image array
 result = comm.gather(result, root=0)
 if rank == 0:
@@ -49,4 +50,5 @@ if rank == 0:
 	# Save PNG
 	image2 = Image.new("RGBA", (width, height))
 	image2.putdata(pixels)
-	image2.save(output, ’PNG’, optimize=False, compress_level=0)
+	image2.save(output, 'PNG', optimize=False, compress_level=0)
+
