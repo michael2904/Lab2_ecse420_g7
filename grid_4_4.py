@@ -8,8 +8,7 @@ from mpi4py import MPI
 from PIL import Image
 import sys
 
-input = sys.argv[1]
-output = sys.argv[2]
+T = sys.argv[1]
 
 comm = MPI.COMM_WORLD
 size = MPI.COMM_WORLD.Get_size()
@@ -19,7 +18,7 @@ name = MPI.Get_processor_name()
 print("This is the rank "+rank+" with name "+name)
 
 if rank == 0:
-	u = [4][4]
+	u [[0 for x in range(4)] for y in range(4)]
 	for i in range(0,4):
 		for j in range(0,4):
 			u[i][j] = 0
