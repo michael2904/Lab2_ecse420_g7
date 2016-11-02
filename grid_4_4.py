@@ -16,6 +16,8 @@ size = MPI.COMM_WORLD.Get_size()
 rank = MPI.COMM_WORLD.Get_rank()
 name = MPI.Get_processor_name()
 
+print("This is the rank "+rank+" with name "+name)
+
 if rank == 0:
 	u = [4][4]
 	for i in range(0,4):
