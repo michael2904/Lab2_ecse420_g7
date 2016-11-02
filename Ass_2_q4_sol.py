@@ -23,7 +23,7 @@ if rank == 0:
 	pixels = list(image.getdata())
 	for i in range(len(pixels)):
 		pixels[i] = list(pixels[i])
-		chunks = [[] for _ in range(size)]
+	chunks = [[] for _ in range(size)]
 	for i, chunk in enumerate(pixels):
 		chunks[i % size].append(chunk)
 else:
