@@ -8,7 +8,7 @@ from mpi4py import MPI
 from PIL import Image
 import sys
 
-T = sys.argv[1]
+T = int(sys.argv[1])
 
 comm = MPI.COMM_WORLD
 size = MPI.COMM_WORLD.Get_size()
@@ -17,12 +17,17 @@ name = MPI.Get_processor_name()
 
 print("This is the rank "+str(rank)+" with name "+str(name))
 
-if rank == 0:
-	u = [[0 for x in range(4)] for y in range(4)]
-	for i in range(0,4):
-		for j in range(0,4):
-			u[i][j] = 0
-			print("output "+str(i)+","+str(j)+" val: "+str(u[i][j]))
-else:
-	u = [[0 for x in range(4)] for y in range(4)]
+for iterations in range(T):
+	print("This is iteration "+str(iterations)+" in rank "+str(rank))
+	if rank == 0:
+		u = [[0 for x in range(4)] for y in range(4)]
+		for i in range(0,4):
+			for j in range(0,4):
+				chunks = [[] for _ in range(size)]
+				print("output "+str(i)+","+str(j)+" val: "+str(u[i][j]))
+
+		for i, chunk in enumerate(u):
+			chunks[i % size].append(chunk)
+	else:
+		u = [[0 for x in range(4)] for y in range(4)]
 
