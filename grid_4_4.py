@@ -18,11 +18,11 @@ name = MPI.Get_processor_name()
 print("This is the rank "+rank+" with name "+name)
 
 if rank == 0:
-	u [[0 for x in range(4)] for y in range(4)]
+	u = [[0 for x in range(4)] for y in range(4)]
 	for i in range(0,4):
 		for j in range(0,4):
 			u[i][j] = 0
 			print("output "+i+","+j+" val: "+u[i][j])
 else:
-	u = [][]
+	u = [[0 for x in range(4)] for y in range(4)]
 
