@@ -217,7 +217,7 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 			print("")
-		u2M = u1M
+		u2M = list(u1M)
 		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
@@ -233,7 +233,7 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 			print("")
-		u1M = uM
+		u1M = list(uM)
 		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
