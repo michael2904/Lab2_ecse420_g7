@@ -33,8 +33,8 @@ for itera in range(T):
 	print("This is iteration "+str(itera)+" in rank "+str(rank))
 	if rank == 0:
 		dataN = [[] for _ in range(size)]
-		for i in range(0,N):
-			for j in range(0,N):
+		for i in range(1,N-1):
+			for j in range(1,N-1):
 				dataN[(i+N*j) % size].append(u1M[i-1][j])
 				dataN[(i+N*j) % size].append(u1M[i+1][j])
 				dataN[(i+N*j) % size].append(u1M[i][j-1])
@@ -47,11 +47,15 @@ for itera in range(T):
 	dataR = comm.scatter(dataN,root = 0)
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 
-	# for i in range(0,N):
-	# 	for j in range(0,N):
-	# 		if rank == (i+N*j):
-	# 			if (i>0 and i<N-1 and j>0 and j<N-1):
-	# 				u[i][j]= (p * (u1[i-1][j] + u1[i+1][j] + u1[i][j-1] + u1[i][j+1] - 4 * u1[i][j]) + 2 * u1[i][j] - (1-eta) * u2[i][j]) / (1+eta)
+	for i in range(1,N-1):
+		for j in range(1,N-1):
+			if rank == (i+N*j):
+				result1 = (p * (dataR[0] + dataR[1] + dataR[2] + dataR[3] - 4 * dataR[4]) + 2 * dataR[4] - (1-eta) * dataR[5]) / (1+eta)
+				print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
+
+
+	results = com.gather(result1, root = 0)
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 
 	# for i in range(1,N-1):
 	# 	if rank < (2 * N):
