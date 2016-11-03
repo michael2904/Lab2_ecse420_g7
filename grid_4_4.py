@@ -59,7 +59,7 @@ for itera in range(T):
 
 	results = comm.gather(result1, root = 0)
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
-	if rank == 0
+	if rank == 0:
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				print("This is uM[i][j] before"+str(uM[i][j]))
