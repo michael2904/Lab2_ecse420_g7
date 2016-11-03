@@ -92,7 +92,7 @@ for itera in range(T):
 		for j in range(0,N):
 			if rank == (i + j*(N-2)) % size:
 				result1 = G * dataR1
-				print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
+				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
 
 	results1 = comm.gather(result1, root = 0)
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
@@ -108,15 +108,33 @@ for itera in range(T):
 				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
 			print("")
 
-	# if rank < 4 :
-	# 	if rank % 4 == 0:
-	# 		u[0][0] = G * u[1][0]
-	# 	elif rank % 4 == 1:
-	# 		u[N - 1][0] = G * u[N - 2][0]
-	# 	elif rank % 4 == 2:
-	# 		u[0][N - 1] = G * u[0][N - 2]
-	# 	elif rank % 4 == 3:
-	# 		u[N - 1][N - 1] = G * u[N - 1][N - 2]
+	if rank == 0:
+		dataN2 = [uM[1][0],uM[N - 2][0],uM[0][N - 2],uM[N - 1][N - 2]]
+	else:
+		dataN2 = None
+
+	print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
+	dataR2 = comm.scatter(dataN2,root = 0)
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
+
+	result2 = None
+	if rank == 0:
+		result2 = G*dataR2[0]
+	elif rank == 1:
+		result2 = G*dataR2[1]
+	elif rank == 2:
+		result2 = G*dataR2[2]
+	elif rank == 3:
+		result2 = G*dataR2[3]
+
+	results2 = comm.gather(result2, root = 0)
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results2))
+
+	if rank == 0:
+		uM[0][0] = results2[0]
+		uM[N-1][0] = results2[1]
+		uM[0][N-1] = results2[2]
+		uM[N-1][N-1] = results2[3]
 
 	if rank == 0:
 		if itera >= 0:
