@@ -32,6 +32,7 @@ if rank == 0:
 for itera in range(T):
 	print("This is iteration "+str(itera)+" in rank "+str(rank))
 	if rank == 0:
+		print("This is iteration "+str(itera)+" first step")
 		print("u before")
 		for i in range(0,N):
 			for j in range(0,N):
@@ -75,6 +76,7 @@ for itera in range(T):
 	results = comm.gather(result, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
+		print("This is iteration "+str(itera)+" second step")
 		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
@@ -102,6 +104,7 @@ for itera in range(T):
 		# 	print("")
 
 	if rank == 0:
+		print("This is iteration "+str(itera)+" third step")
 		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
