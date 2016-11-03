@@ -77,8 +77,8 @@ for itera in range(T):
 		for i in range(1,N-1):
 			dataN1[(i + 0*(N-2)) % size] = (uM[1][i])
 			dataN1[(i + 1*(N-2)) % size] = (uM[N - 2][i])
-			dataN1[(i + 2*(N-2)) % size] = (uM[1][i])
-			dataN1[(i + 3*(N-2)) % size] = (uM[1][i])
+			dataN1[(i + 2*(N-2)) % size] = (uM[i][1])
+			dataN1[(i + 3*(N-2)) % size] = (uM[i][N-2])
 			# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 	else:
 		dataN1 = None
