@@ -32,6 +32,21 @@ if rank == 0:
 for itera in range(T):
 	print("This is iteration "+str(itera)+" in rank "+str(rank))
 	if rank == 0:
+		print("u before first step")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1 before first step")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2 before first step")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
 		dataN = [[] for _ in range(size)]
 		for i in range(1,N-1):
 			for j in range(1,N-1):
@@ -72,6 +87,21 @@ for itera in range(T):
 		# 	print("")
 
 	if rank == 0:
+		print("u after first step")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1 after first step")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2 after first step")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
 		dataN1 = [None for _ in range(size)]
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
