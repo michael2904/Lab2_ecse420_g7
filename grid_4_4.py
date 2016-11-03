@@ -36,12 +36,12 @@ for itera in range(T):
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				print("This is rank "+str(rank)+" and u1M "+str(u1M)+" and u1M[i-1][j] ="+str(u1M[i-1][j]))
-				dataN[(j+N*i) % size].append(u1M[i-1][j])
-				dataN[(j+N*i) % size].append(u1M[i+1][j])
-				dataN[(j+N*i) % size].append(u1M[i][j-1])
-				dataN[(j+N*i) % size].append(u1M[i][j+1])
-				dataN[(j+N*i) % size].append(u1M[i][j])
-				dataN[(j+N*i) % size].append(u2M[i][j])
+				dataN[(i+(N-2)*j) % size].append(u1M[i-1][j])
+				dataN[(i+(N-2)*j) % size].append(u1M[i+1][j])
+				dataN[(i+(N-2)*j) % size].append(u1M[i][j-1])
+				dataN[(i+(N-2)*j) % size].append(u1M[i][j+1])
+				dataN[(i+(N-2)*j) % size].append(u1M[i][j])
+				dataN[(i+(N-2)*j) % size].append(u2M[i][j])
 				print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
