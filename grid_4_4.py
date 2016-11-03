@@ -64,7 +64,7 @@ for itera in range(T):
 
 	for i in range(0,N):
 		for j in range(0,N):
-			print('u('+i+","+j+") : "+str(u[i][j])+" |", end="")
+			print('u('+str(i)+","+str(j)+") : "+str(u[i][j])+" |"),
 		print("")
 
 
