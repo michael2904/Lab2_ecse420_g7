@@ -53,7 +53,7 @@ for itera in range(T):
 	for i in range(1,N-1):
 		for j in range(1,N-1):
 			if rank == (i+(N-2)*j) % size:
-				result = (p * (dataR[0] + dataR[1] + dataR[2] + dataR[3] - 4 * dataR[4]) + 2 * dataR[4] - (1-eta) * dataR[5]) / (1+eta)
+				result = ((p * (dataR[0] + dataR[1] + dataR[2] + dataR[3] - 4 * dataR[4])) + (2 * dataR[4]) - ((1-eta) * dataR[5])) / (1+eta)
 				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result "+str(result)+" at i,j "+str(i)+","+str(j))
 
 
@@ -165,6 +165,11 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
 			print("")
+		print("u2")
+				for i in range(0,N):
+					for j in range(0,N):
+						print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+					print("")
 		
 
 
