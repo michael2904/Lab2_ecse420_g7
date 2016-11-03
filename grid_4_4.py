@@ -123,16 +123,12 @@ for itera in range(T):
 
 	result2 = None
 	if rank == 0:
-		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
 		result2 = G * dataR2
 	elif rank == 1:
-		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
 		result2 = G * dataR2
 	elif rank == 2:
-		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
 		result2 = G * dataR2
 	elif rank == 3:
-		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
 		result2 = G * dataR2
 
 	results2 = comm.gather(result2, root = 0)
@@ -149,9 +145,20 @@ for itera in range(T):
 			if itera >= 1:
 				u2M = u1M
 			u1M = uM
+		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 			print("")
 
 
