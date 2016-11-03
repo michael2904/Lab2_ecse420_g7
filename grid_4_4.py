@@ -141,6 +141,20 @@ for itera in range(T):
 		uM[N-1][N-1] = results2[3]
 
 	if rank == 0:
+		if itera >= 0:
+			if itera >= 1:
+				print("u2")
+				for i in range(0,N):
+					for j in range(0,N):
+						print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+					print("")
+				u2M = u1M
+				print("u2")
+				for i in range(0,N):
+					for j in range(0,N):
+						print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+					print("")
+			u1M = uM
 		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
@@ -151,15 +165,6 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
 			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
-		if itera >= 0:
-			if itera >= 1:
-				u2M = u1M
-			u1M = uM
 		
 
 
