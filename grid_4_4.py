@@ -1,7 +1,7 @@
 # Lab 2 ECSE 420 group 7
 # Michael Abdallah-Minciotti
 # Marco Manglaviti
-# Assignment 2 Q4 test
+# Lab 2 q1
 
 
 from mpi4py import MPI
@@ -28,7 +28,7 @@ if rank == 0:
 	uM = [[0 for x in range(N)] for y in range(N)]
 	u1M = [[0 for x in range(N)] for y in range(N)]
 	u2M = [[0 for x in range(N)] for y in range(N)]
-	u1M[2][2] = 1
+	u1M[N/2][N/2] = 1
 
 for itera in range(T):
 	print("This is iteration "+str(itera)+" in rank "+str(rank))
