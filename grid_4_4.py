@@ -35,12 +35,12 @@ for itera in range(T):
 		dataN = [[] for _ in range(size)]
 		for i in range(0,N):
 			for j in range(0,N):
-				dataN[(i+N*j) % size].append(u1[i-1][j])
-				dataN[(i+N*j) % size].append(u1[i+1][j])
-				dataN[(i+N*j) % size].append(u1[i][j-1])
-				dataN[(i+N*j) % size].append(u1[i][j+1])
-				dataN[(i+N*j) % size].append(u1[i][j])
-				dataN[(i+N*j) % size].append(u2[i][j])
+				dataN[(i+N*j) % size].append(u1M[i-1][j])
+				dataN[(i+N*j) % size].append(u1M[i+1][j])
+				dataN[(i+N*j) % size].append(u1M[i][j-1])
+				dataN[(i+N*j) % size].append(u1M[i][j+1])
+				dataN[(i+N*j) % size].append(u1M[i][j])
+				dataN[(i+N*j) % size].append(u2M[i][j])
 	else:
 		dataN = None
 
