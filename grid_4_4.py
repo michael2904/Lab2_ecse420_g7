@@ -35,18 +35,18 @@ for itera in range(T):
 		dataN = [[] for _ in range(size)]
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				print("This is rank "+str(rank)+" and u1M "+str(u1M)+" and u1M[i-1][j] ="+str(u1M[i-1][j]))
+				# print("This is rank "+str(rank)+" and u1M "+str(u1M)+" and u1M[i-1][j] ="+str(u1M[i-1][j]))
 				dataN[(i+(N-2)*j) % size].append(u1M[i-1][j])
 				dataN[(i+(N-2)*j) % size].append(u1M[i+1][j])
 				dataN[(i+(N-2)*j) % size].append(u1M[i][j-1])
 				dataN[(i+(N-2)*j) % size].append(u1M[i][j+1])
 				dataN[(i+(N-2)*j) % size].append(u1M[i][j])
 				dataN[(i+(N-2)*j) % size].append(u2M[i][j])
-				print("This is rank "+str(rank)+" and dataN "+str(dataN))
+				# print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
 
-	print("This is rank "+str(rank)+" and dataN "+str(dataN))
+	# print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	dataR = comm.scatter(dataN,root = 0)
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result1 = None
@@ -54,7 +54,7 @@ for itera in range(T):
 		for j in range(1,N-1):
 			if rank == (i+(N-2)*j) % size:
 				result1 = (p * (dataR[0] + dataR[1] + dataR[2] + dataR[3] - 4 * dataR[4]) + 2 * dataR[4] - (1-eta) * dataR[5]) / (1+eta)
-				print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
+				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
 
 
 	results = comm.gather(result1, root = 0)
@@ -62,9 +62,9 @@ for itera in range(T):
 	if rank == 0:
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				print("This is uM[i][j] before"+str(uM[i][j]))
+				# print("This is uM[i][j] before"+str(uM[i][j]))
 				uM[i][j] = results[(i+(N-2)*j) % size]
-				print("This is uM[i][j] before"+str(uM[i][j]))
+				# print("This is uM[i][j] before"+str(uM[i][j]))
 
 		for i in range(0,N):
 			for j in range(0,N):
@@ -72,11 +72,14 @@ for itera in range(T):
 			print("")
 
 	if rank == 0:
-		dataN2 = [for _ in range(size)]
-		print("This is rank "+str(rank)+" and dataN1 "+str(dataN2))
+		dataN1 = [None for _ in range(size)]
+		print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
-			dataN2[i % size] = (u[1][i])
-			print("This is rank "+str(rank)+" and dataN1 "+str(dataN2))
+			dataN1[(i + 0*(N-2)) % size] = (uM[1][i])
+			dataN1[(i + 1*(N-2)) % size] = (uM[N - 2][i])
+			dataN1[(i + 2*(N-2)) % size] = (uM[1][i])
+			dataN1[(i + 3*(N-2)) % size] = (uM[1][i])
+			print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 	else:
 		dataN1 = None
 
@@ -95,6 +98,8 @@ for itera in range(T):
 	# 			u[i][0] = G * u[i][1]
 	# 		elif rank % 4 == 3:
 	# 			u[i][N - 1] = G * u[i][N - 2]
+
+
 
 	# if rank < 4 :
 	# 	if rank % 4 == 0:
