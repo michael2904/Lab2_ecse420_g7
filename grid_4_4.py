@@ -66,10 +66,10 @@ for itera in range(T):
 				uM[i][j] = results[(i+(N-2)*j) % size]
 				# print("This is uM[i][j] before"+str(uM[i][j]))
 
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
+		# for i in range(0,N):
+		# 	for j in range(0,N):
+		# 		print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+		# 	print("")
 
 	if rank == 0:
 		dataN1 = [None for _ in range(size)]
@@ -103,10 +103,10 @@ for itera in range(T):
 			uM[i][0] = results1[(i + 2*(N-2)) % size]
 			uM[i][N - 1] = results1[(i + 3*(N-2)) % size]
 
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
+		# for i in range(0,N):
+		# 	for j in range(0,N):
+		# 		print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+		# 	print("")
 
 	if rank == 0:
 		dataN2 = [None for _ in range(size)]
