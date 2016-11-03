@@ -45,13 +45,14 @@ for itera in range(T):
 				print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
+
 	print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	dataR = comm.scatter(dataN,root = 0)
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result1 = None
 	for i in range(1,N-1):
 		for j in range(1,N-1):
-			if rank == (i+N*j) % size:
+			if rank == (i+(N-2)*j) % size:
 				result1 = (p * (dataR[0] + dataR[1] + dataR[2] + dataR[3] - 4 * dataR[4]) + 2 * dataR[4] - (1-eta) * dataR[5]) / (1+eta)
 				print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
 
