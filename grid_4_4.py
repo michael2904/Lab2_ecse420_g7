@@ -100,7 +100,7 @@ for itera in range(T):
 		for i in range(1,N-1):
 			uM[0][i] = results1[(i + 0*(N-2)) % size]
 			uM[N - 1][i] = results1[(i + 1*(N-2)) % size]
-			uM[i][0] = results1(i + 2*(N-2)) % size
+			uM[i][0] = results1[(i + 2*(N-2)) % size]
 			uM[i][N - 1] = results1[(i + 3*(N-2)) % size]
 
 		for i in range(0,N):
