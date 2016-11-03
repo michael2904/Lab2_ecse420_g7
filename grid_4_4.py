@@ -109,7 +109,11 @@ for itera in range(T):
 			print("")
 
 	if rank == 0:
-		dataN2 = [uM[1][0],uM[N - 2][0],uM[0][N - 2],uM[N - 1][N - 2]]
+		dataN2 = [None for _ in range(size)]
+		dataN2[0] = uM[1][0]
+		dataN2[1] = uM[N - 2][0]
+		dataN2[2] = uM[0][N - 2]
+		dataN2[3] = uM[N - 1][N - 2]
 	else:
 		dataN2 = None
 
