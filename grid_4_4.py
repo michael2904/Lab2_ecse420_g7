@@ -7,6 +7,7 @@
 from mpi4py import MPI
 from PIL import Image
 from math import exp
+from copy import copy
 import sys
 
 T = int(sys.argv[1])
@@ -217,7 +218,7 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 			print("")
-		u2M = list(u1M)
+		u2M = copy(u1M)
 		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
@@ -233,7 +234,7 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 			print("")
-		u1M = list(uM)
+		u1M = copy(uM)
 		print("u")
 		for i in range(0,N):
 			for j in range(0,N):
