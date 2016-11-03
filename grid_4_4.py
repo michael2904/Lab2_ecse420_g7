@@ -73,6 +73,7 @@ for itera in range(T):
 
 	if rank == 0:
 		dataN2 = [_ for _ in range(size)]
+		print("This is rank "+str(rank)+" and dataN1 "+str(dataN2))
 		for i in range(1,N-1):
 			dataN2[i % size].append(u[1][i])
 			print("This is rank "+str(rank)+" and dataN1 "+str(dataN2))
