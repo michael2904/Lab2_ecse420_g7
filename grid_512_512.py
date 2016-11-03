@@ -133,18 +133,18 @@ for itera in range(T):
     u2M = deepcopy(u1M)
     u1M = deepcopy(uM)
     print("u")
-    for i in range(N-2,N+2):
-      for j in range(N-2,N+2):
+    for i in range((N/2)-2,(N/2)+2):
+      for j in range((N/2)-2,(N/2)+2):
         print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
       print("")
     print("u1")
-    for i in range(N-2,N+2):
-      for j in range(N-2,N+2):
+    for i in range((N/2)-2,(N/2)+2):
+      for j in range((N/2)-2,(N/2)+2):
         print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
       print("")
     print("u2")
-    for i in range(N-2,N+2):
-      for j in range(N-2,N+2):
+    for i in range((N/2)-2,(N/2)+2):
+      for j in range((N/2)-2,(N/2)+2):
         print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
       print("")
 
