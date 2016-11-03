@@ -33,22 +33,6 @@ if rank == 0:
 for itera in range(T):
 	print("This is iteration "+str(itera)+" in rank "+str(rank))
 	if rank == 0:
-		print("This is iteration "+str(itera)+" first step")
-		print("u before")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1 before")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2 before")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
 		dataN = [[] for _ in range(size)]
 		for i in range(1,N-1):
 			for j in range(1,N-1):
@@ -77,47 +61,11 @@ for itera in range(T):
 	results = comm.gather(result, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
-		print("This is iteration "+str(itera)+" first. second step")
-		print("u before")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1 before")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2 before")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
-
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |")
 				uM[i][j] = results[(i+(N-2)*j) % size]
-				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |")
-
 
 	if rank == 0:
-		print("This is iteration "+str(itera)+" second step")
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
 		dataN1 = [None for _ in range(size)]
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
@@ -149,28 +97,7 @@ for itera in range(T):
 			uM[i][0] = results1[(i + 2*(N-2)) % size]
 			uM[i][N - 1] = results1[(i + 3*(N-2)) % size]
 
-		# for i in range(0,N):
-		# 	for j in range(0,N):
-		# 		print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-		# 	print("")
-
 	if rank == 0:
-		print("This is iteration "+str(itera)+" third step")
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
 		dataN2 = [None for _ in range(size)]
 		dataN2[0] = uM[1][0]
 		dataN2[1] = uM[N - 2][0]
@@ -203,37 +130,7 @@ for itera in range(T):
 		uM[N-1][N-1] = results2[3]
 
 	if rank == 0:
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
 		u2M = deepcopy(u1M)
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
 		u1M = deepcopy(uM)
 		print("u")
 		for i in range(0,N):
