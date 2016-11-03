@@ -65,11 +65,24 @@ for itera in range(T):
 				print("This is uM[i][j] before"+str(uM[i][j]))
 				uM[i][j] = results[(i+(N-2)*j) % size]
 				print("This is uM[i][j] before"+str(uM[i][j]))
-				
+
 		for i in range(0,N):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
 			print("")
+
+	if rank == 0:
+		dataN2 = []
+		for i in range(1,N-1):
+			dataN2[i % size].append(u[1][i])
+			print("This is rank "+str(rank)+" and dataN1 "+str(dataN2))
+	else:
+		dataN1 = None
+
+	print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+	dataR1 = comm.scatter(dataN1,root = 0)
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
+
 
 	# for i in range(1,N-1):
 	# 	if rank < (2 * N):
