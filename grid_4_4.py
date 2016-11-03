@@ -92,9 +92,13 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 			print("")
+
 		for i in range(1,N-1):
 			for j in range(1,N-1):
+				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
 				uM[i][j] = results[(i+(N-2)*j) % size]
+				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+
 
 	if rank == 0:
 		print("This is iteration "+str(itera)+" second step")
