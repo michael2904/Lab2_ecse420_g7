@@ -171,83 +171,64 @@ for itera in range(T):
 		uM[N-1][N-1] = results2[3]
 
 	if rank == 0:
-		if itera >= 0:
-			if itera >= 1:
-				print("u iter 1 Before")
-				for i in range(0,N):
-					for j in range(0,N):
-						print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-					print("")
-				print("u1 iter 1 Before")
-				for i in range(0,N):
-					for j in range(0,N):
-						print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-					print("")
-				print("u2 iter 1 Before")
-				for i in range(0,N):
-					for j in range(0,N):
-						print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-					print("")
-				u2M = u1M
-				print("u iter 1 After")
-				for i in range(0,N):
-					for j in range(0,N):
-						print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-					print("")
-				print("u1 iter 1 After")
-				for i in range(0,N):
-					for j in range(0,N):
-						print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-					print("")
-				print("u2 iter 1 After")
-				for i in range(0,N):
-					for j in range(0,N):
-						print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-					print("")
-			print("u iter 0 Before")
-			for i in range(0,N):
-				for j in range(0,N):
-					print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-				print("")
-			print("u1 iter 0 Before")
-			for i in range(0,N):
-				for j in range(0,N):
-					print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-				print("")
-			print("u2 iter 0 Before")
-			for i in range(0,N):
-				for j in range(0,N):
-					print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-				print("")
-			u1M = uM
-			print("u iter 0 After")
-			for i in range(0,N):
-				for j in range(0,N):
-					print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-				print("")
-			print("u1 iter 0 After")
-			for i in range(0,N):
-				for j in range(0,N):
-					print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-				print("")
-			print("u2 iter 0 After")
-			for i in range(0,N):
-				for j in range(0,N):
-					print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-				print("")
-
-
-		print("u")
+		print("u iter 1 Before")
 		for i in range(0,N):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
 			print("")
-		print("u1")
+		print("u1 iter 1 Before")
 		for i in range(0,N):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
 			print("")
-		print("u2")
+		print("u2 iter 1 Before")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
+		u2M = u1M
+		print("u iter 1 After")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1 iter 1 After")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2 iter 1 After")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
+		print("u iter 0 Before")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1 iter 0 Before")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2 iter 0 Before")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
+		u1M = uM
+		print("u iter 0 After")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1 iter 0 After")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2 iter 0 After")
 		for i in range(0,N):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
