@@ -7,7 +7,7 @@
 from mpi4py import MPI
 from PIL import Image
 from math import exp
-from copy import copy
+from copy import copy,deepcopy
 import sys
 
 T = int(sys.argv[1])
