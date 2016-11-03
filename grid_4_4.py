@@ -75,6 +75,21 @@ for itera in range(T):
 	results = comm.gather(result, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
+		print("u")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				# print("This is uM[i][j] before"+str(uM[i][j]))
@@ -87,6 +102,21 @@ for itera in range(T):
 		# 	print("")
 
 	if rank == 0:
+		print("u")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
 		dataN1 = [None for _ in range(size)]
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
