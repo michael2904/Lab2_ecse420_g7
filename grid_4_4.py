@@ -18,27 +18,26 @@ name = MPI.Get_processor_name()
 
 p = 0.5
 G = 0.75
-eta = 2* exp(1e-4)
-print("This is eta "+str(eta))
+eta = 0.0002
 
 print("This is the rank "+str(rank)+" with name "+str(name))
 
 N = 4
 
-	u = [[0 for x in range(N)] for y in range(N)]
-	u1 = [[0 for x in range(N)] for y in range(N)]
-	u2 = [[0 for x in range(N)] for y in range(N)]
+u = [[0 for x in range(N)] for y in range(N)]
+u1 = [[0 for x in range(N)] for y in range(N)]
+u2 = [[0 for x in range(N)] for y in range(N)]
 
 for itera in range(T):
-	# print("This is iteration "+str(itera)+" in rank "+str(rank))
-	for i in range(0,4):
-		for j in range(0,4):
-			if rank == (i+4*j):
+	print("This is iteration "+str(itera)+" in rank "+str(rank))
+	for i in range(0,N):
+		for j in range(0,N):
+			if rank == (i+N*j):
 				if (i>0 and i<N-1 and j>0 and j<N-1):
-					u[i][j]= (p(u1[i-1][j] + u1[i+1][j] + u1[i][j-1] + u1[i][j+1] - 4 * u1[i][j]) + 2 * u1[i][j] - (1-eta) * u2[i][j]) / (1+eta)
+					u[i][j]= (p * (u1[i-1][j] + u1[i+1][j] + u1[i][j-1] + u1[i][j+1] - 4 * u1[i][j]) + 2 * u1[i][j] - (1-eta) * u2[i][j]) / (1+eta)
 
 	for i in range(1,N-1):
-		if rank < (2 * N)
+		if rank < (2 * N):
 			if rank % 4 == 0:
 				u[0][i] = G * u[1][i]
 			elif rank % 4 == 1:
@@ -61,4 +60,12 @@ for itera in range(T):
 	if itera >= 0:
 		if itera >= 1:
 			u2 = u1
-		u1 = u0
+		u1 = u
+
+	for i in range(0,N):
+		for j in range(0,N):
+			print('u('+i+","+j+") : "+str(u[i][j])+" |", end="")
+		print("")
+
+
+
