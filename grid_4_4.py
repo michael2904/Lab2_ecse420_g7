@@ -123,13 +123,17 @@ for itera in range(T):
 
 	result2 = None
 	if rank == 0:
-		result2 = G*dataR2[0]
+		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
+		result2 = G * dataR2[0]
 	elif rank == 1:
-		result2 = G*dataR2[1]
+		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
+		result2 = G * dataR2[1]
 	elif rank == 2:
-		result2 = G*dataR2[2]
+		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
+		result2 = G * dataR2[2]
 	elif rank == 3:
-		result2 = G*dataR2[3]
+		print("*********************This is rank "+str(rank)+" and dataN2 "+str(dataR2))
+		result2 = G * dataR2[3]
 
 	results2 = comm.gather(result2, root = 0)
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results2))
