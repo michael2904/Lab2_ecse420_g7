@@ -95,9 +95,9 @@ for itera in range(T):
 
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |")
 				uM[i][j] = results[(i+(N-2)*j) % size]
-				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+				print("u("+str(i)+","+str(j)+") : "+str(uM[i][j])+" |u("+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |")
 
 
 	if rank == 0:
