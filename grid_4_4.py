@@ -142,7 +142,7 @@ for itera in range(T):
 
 	# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
 	dataR2 = comm.scatter(dataN2,root = 0)
-	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
 
 	result2 = None
 	count4 = 0
