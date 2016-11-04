@@ -128,7 +128,7 @@ for itera in range(T):
 	# This is the beginning of step 3
 
 	if rank == 0:
-		dataN2 = [[]] for _ in range(size)]
+		dataN2 = [[] for _ in range(size)]
 
 		dataN2[0 % size].append(uM[1][0])
 		dataN2[1 % size].append(uM[N - 2][0])
