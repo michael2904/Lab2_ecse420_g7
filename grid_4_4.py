@@ -106,7 +106,7 @@ for itera in range(T):
 	for i in range(1,N-1):
 		for j in range(0,4):
 			if rank == (i + j*(N-2)) % size:
-				result1 = G * dataR1
+				result1 = G * dataR1[j]
 				result1List.append(result1)
 				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
 
