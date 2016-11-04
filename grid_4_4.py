@@ -37,12 +37,14 @@ for itera in range(T):
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				# print("This is rank "+str(rank)+" and u1M "+str(u1M)+" and u1M[i-1][j] ="+str(u1M[i-1][j]))
-				dataN[(i+(N-2)*j) % size].append(u1M[i-1][j])
-				dataN[(i+(N-2)*j) % size].append(u1M[i+1][j])
-				dataN[(i+(N-2)*j) % size].append(u1M[i][j-1])
-				dataN[(i+(N-2)*j) % size].append(u1M[i][j+1])
-				dataN[(i+(N-2)*j) % size].append(u1M[i][j])
-				dataN[(i+(N-2)*j) % size].append(u2M[i][j])
+				dataList = []
+				dataList.append(u1M[i-1][j])
+				dataList.append(u1M[i+1][j])
+				dataList.append(u1M[i][j-1])
+				dataList.append(u1M[i][j+1])
+				dataList.append(u1M[i][j])
+				dataList.append(u2M[i][j])
+				dataN[(i+(N-2)*j) % size].append(dataList)
 				# print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
@@ -51,19 +53,25 @@ for itera in range(T):
 	dataR = comm.scatter(dataN,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result = None
+	count = 0
+	resultList = []
 	for i in range(1,N-1):
 		for j in range(1,N-1):
 			if rank == (i+(N-2)*j) % size:
-				result = ((p * (dataR[0] + dataR[1] + dataR[2] + dataR[3] - 4 * dataR[4])) + (2 * dataR[4]) - ((1-eta) * dataR[5])) / (1+eta)
+				result = ((p * (dataR[count][0] + dataR[count][1] + dataR[count][2] + dataR[count][3] - 4 * dataR[count][4])) + (2 * dataR[count][4]) - ((1-eta) * dataR[count][5])) / (1+eta)
+				resultList.append(result)
+				count++
 				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result "+str(result)+" at i,j "+str(i)+","+str(j))
 
 
-	results = comm.gather(result, root = 0)
+	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
+		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				uM[i][j] = results[(i+(N-2)*j) % size]
+				uM[i][j] = results[(i+(N-2)*j) % size][count2]
+				count2++
 
 	if rank == 0:
 		dataN1 = [None for _ in range(size)]
