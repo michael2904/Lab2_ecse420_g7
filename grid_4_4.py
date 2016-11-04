@@ -154,7 +154,7 @@ for itera in range(T):
 			result2List.append(result2)
 			count4 += 1
 
-	results2 = comm.gather(result2, root = 0)
+	results2 = comm.gather(result2List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results2))
 
 	if rank == 0:
