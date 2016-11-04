@@ -158,6 +158,21 @@ for itera in range(T):
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results2))
 
 	if rank == 0:
+		print("u")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
 		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
 		count5 = 0
 		for i in range(0,4):
