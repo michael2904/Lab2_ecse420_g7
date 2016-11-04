@@ -88,7 +88,9 @@ for itera in range(T):
 	else:
 		dataN1 = None
 
-	# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+	if rank == 0:
+		print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+
 	dataR1 = comm.scatter(dataN1,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
 
@@ -102,6 +104,7 @@ for itera in range(T):
 	results1 = comm.gather(result1, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 	if rank == 0:
+		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 		for i in range(1,N-1):
 			uM[0][i] = results1[(i + 0*(N-2)) % size]
 			uM[N - 1][i] = results1[(i + 1*(N-2)) % size]
