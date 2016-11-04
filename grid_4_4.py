@@ -146,7 +146,7 @@ for itera in range(T):
 	result2List = []
 	for i in range(0,len(dataR2)):
 		count4Val = count4/size
-		if rank == i % size
+		if rank == i % size:
 			result2 = G * dataR2[count4Val]
 			result2List.append(result2)
 			count4 += 1
