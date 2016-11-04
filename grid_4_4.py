@@ -158,6 +158,7 @@ for itera in range(T):
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results2))
 
 	if rank == 0:
+		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
 		count5 = 0
 		for i in range(0,4):
 			count5Val = count5/size
