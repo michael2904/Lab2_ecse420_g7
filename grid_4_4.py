@@ -151,7 +151,7 @@ for itera in range(T):
 	for i in range(0,len(dataR2)):
 		count4Val = count4/size
 		print("This is count4Val: "+str(count4Val)+" in rank "+str(rank))
-		if rank == i % size:
+		if rank == i % len(dataR2):
 			result2 = G * dataR2[count4Val]
 			print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2 "+str(result2))
 			result2List.append(result2)
