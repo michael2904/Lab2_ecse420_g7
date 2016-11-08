@@ -178,14 +178,15 @@ for itera in range(T):
 		count5 = 0
 		for i in range(0,4):
 			count5Val = count5/size
+			count5Mod = count5%size
 			if i == 0:
-				uM[0][0] = results2[i%size][count5Val]
+				uM[0][0] = results2[count5Val][count5Mod]
 			elif i == 1:
-				uM[N-1][0] = results2[i%size][count5Val]
+				uM[N-1][0] = results2[count5Val][count5Mod]
 			elif i == 2:
-				uM[0][N-1] = results2[i%size][count5Val]
+				uM[0][N-1] = results2[count5Val][count5Mod]
 			elif i == 3:
-				uM[N-1][N-1] = results2[i%size][count5Val]
+				uM[N-1][N-1] = results2[count5Val][count5Mod]
 			count5 += 1
 
 	# This is the end of step 3
