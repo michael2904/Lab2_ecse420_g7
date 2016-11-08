@@ -181,13 +181,13 @@ for itera in range(T):
 			count5Mod = count5%size
 			print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
 			if i == 0:
-				uM[0][0] = results2[count5Val][count5Mod]
+				uM[0][0] = results2[count5Mod][count5Val]
 			elif i == 1:
-				uM[N-1][0] = results2[count5Val][count5Mod]
+				uM[N-1][0] = results2[count5Mod][count5Val]
 			elif i == 2:
-				uM[0][N-1] = results2[count5Val][count5Mod]
+				uM[0][N-1] = results2[count5Mod][count5Val]
 			elif i == 3:
-				uM[N-1][N-1] = results2[count5Val][count5Mod]
+				uM[N-1][N-1] = results2[count5Mod][count5Val]
 			count5 += 1
 
 	# This is the end of step 3
