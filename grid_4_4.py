@@ -37,6 +37,7 @@ for itera in range(T):
 	# This is beginning of step 1
 	if rank == 0:
 		dataN = [[] for _ in range(size)]
+		print(dataN)
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				if ((N-2)*(N-2)/size) > 0:
