@@ -61,7 +61,7 @@ for itera in range(T):
 	for i in range(1,N-1):
 		for j in range(1,N-1):
 			if rank == ((i-1)+(N-2)*(j-1)) % size:
-				countVal = count/size
+				countVal = count%size
 				result = ((p * (dataR[countVal][0] + dataR[countVal][1] + dataR[countVal][2] + dataR[countVal][3] - 4 * dataR[countVal][4])) + (2 * dataR[countVal][4]) - ((1-eta) * dataR[countVal][5])) / (1+eta)
 				resultList.append(result)
 				count += 1
@@ -75,7 +75,7 @@ for itera in range(T):
 		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				count2Val = count2/size
+				count2Val = count2%size
 				uM[i][j] = results[((i-1)+(N-2)*(j-1)) % size][count2Val]
 				count2 += 1
 
