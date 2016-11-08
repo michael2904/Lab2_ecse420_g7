@@ -67,7 +67,7 @@ for itera in range(T):
 				count += 1
 				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result "+str(result)+" at i,j "+str(i)+","+str(j))
 
-
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList))
 	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
