@@ -109,7 +109,7 @@ for itera in range(T):
 				dataN1[((i-1)*4 + 1) / (4*(N-2)/size)].append(uM[N - 2][i])
 				dataN1[((i-1)*4 + 2) / (4*(N-2)/size)].append(uM[i][1])
 				dataN1[((i-1)*4 + 3) / (4*(N-2)/size)].append(uM[i][N-2])
-				print(">0*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+				# print(">0*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 			else:
 				dataN1[((i-1)*4 + 0)].append(uM[1][i])
 				dataN1[((i-1)*4 + 1)].append(uM[N - 2][i])
@@ -196,12 +196,17 @@ for itera in range(T):
 
 	if rank == 0:
 		dataN2 = [[] for _ in range(size)]
-
-		dataN2[0 / (4*(N-2)/size)].append(uM[1][0])
-		dataN2[1 / (4*(N-2)/size)].append(uM[N - 2][0])
-		dataN2[2 / (4*(N-2)/size)].append(uM[0][N - 2])
-		dataN2[3 / (4*(N-2)/size)].append(uM[N - 1][N - 2])
-		# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
+		if (4*(N-2)/size) > 0 :
+			dataN2[0 / (4*(N-2)/size)].append(uM[1][0])
+			dataN2[1 / (4*(N-2)/size)].append(uM[N - 2][0])
+			dataN2[2 / (4*(N-2)/size)].append(uM[0][N - 2])
+			dataN2[3 / (4*(N-2)/size)].append(uM[N - 1][N - 2])
+			# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
+		else:
+			dataN2[0].append(uM[1][0])
+			dataN2[1].append(uM[N - 2][0])
+			dataN2[2].append(uM[0][N - 2])
+			dataN2[3].append(uM[N - 1][N - 2])
 	else:
 		dataN2 = None
 
@@ -222,17 +227,27 @@ for itera in range(T):
 	if rank == 0:
 		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
 		for i in range(0,4):
-			count5Mod = i%((4*(N-2)/size))
-			count5Val = i/((4*(N-2)/size))
-			# print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
-			if i == 0:
-				uM[0][0] = results2[count5Val][count5Mod]
-			elif i == 1:
-				uM[N-1][0] = results2[count5Val][count5Mod]
-			elif i == 2:
-				uM[0][N-1] = results2[count5Val][count5Mod]
-			elif i == 3:
-				uM[N-1][N-1] = results2[count5Val][count5Mod]
+			if (4*(N-2)/size) > 0 :
+				count5Mod = i%((4*(N-2)/size))
+				count5Val = i/((4*(N-2)/size))
+				# print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
+				if i == 0:
+					uM[0][0] = results2[count5Val][count5Mod]
+				elif i == 1:
+					uM[N-1][0] = results2[count5Val][count5Mod]
+				elif i == 2:
+					uM[0][N-1] = results2[count5Val][count5Mod]
+				elif i == 3:
+					uM[N-1][N-1] = results2[count5Val][count5Mod]
+			else:
+				if i == 0:
+					uM[0][0] = results2[i][0]
+				elif i == 1:
+					uM[N-1][0] = results2[i][0]
+				elif i == 2:
+					uM[0][N-1] = results2[i][0]
+				elif i == 3:
+					uM[N-1][N-1] = results2[i][]
 
 	# This is the end of step 3
 
