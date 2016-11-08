@@ -80,13 +80,14 @@ for itera in range(T):
 	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
-		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
+		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				if ((N-2)*(N-2)/size) > 0 :
 					count2Mod = count2%((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)
 					count2Val = count2/((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)
+					print("these are the indexes: "+str(count2Val)+" and "+str(count2Mod))
 					uM[i][j] = results[count2Val][count2Mod]
 				else:
 					uM[i][j] = results[count2][0]
