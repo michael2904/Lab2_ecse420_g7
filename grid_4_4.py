@@ -148,23 +148,32 @@ for itera in range(T):
 		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 		count3 = 0
 		for i in range(1,N-1):
-			count3Mod = count3%((4*(N-2)/size))
-			count3Val = count3/((4*(N-2)/size))
-			# print("This is count3Mod: "+str(count3Mod)+" and this is count3Val: "+str(count3Val))
-			uM[0][i] = results1[count3Val][count3Mod]
-			count3 += 1
-			count3Mod = count3%((4*(N-2)/size))
-			count3Val = count3/((4*(N-2)/size))
-			uM[N - 1][i] = results1[count3Val][count3Mod]
-			count3 += 1
-			count3Mod = count3%((4*(N-2)/size))
-			count3Val = count3/((4*(N-2)/size))
-			uM[i][0] = results1[count3Val][count3Mod]
-			count3 += 1
-			count3Mod = count3%((4*(N-2)/size))
-			count3Val = count3/((4*(N-2)/size))
-			uM[i][N - 1] = results1[count3Val][count3Mod]
-			count3 += 1
+			if (4*(N-2)/size) > 0 :
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[0][i] = results1[count3Val][count3Mod]
+				count3 += 1
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[N - 1][i] = results1[count3Val][count3Mod]
+				count3 += 1
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[i][0] = results1[count3Val][count3Mod]
+				count3 += 1
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[i][N - 1] = results1[count3Val][count3Mod]
+				count3 += 1
+			else:
+				uM[0][i] = results1[count3][0]
+				count3 += 1
+				uM[N - 1][i] = results1[count3][0]
+				count3 += 1
+				uM[i][0] = results1[count3][0]
+				count3 += 1
+				uM[i][N - 1] = results1[count3][0]
+				count3 += 1
 
 	# This is the end of step 2
 	if rank == 0:
