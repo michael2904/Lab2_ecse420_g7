@@ -124,7 +124,7 @@ for itera in range(T):
 	for i in range(1,N-1):
 		for j in range(0,4):
 			count23Val = count23/size
-			if rank == (i + j*(N-2)) % size:
+			if rank == ((i-1) + (j-1)*(N-2)) % size:
 				result1 = G * dataR1[count23Val]
 				result1List.append(result1)
 				count23 += 1
@@ -136,11 +136,12 @@ for itera in range(T):
 		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 		count3 = 0
 		for i in range(1,N-1):
+			count3Mod = count3%size
 			count3Val = count3/size
-			uM[0][i] = results1[(i + 0*(N-2)) % size][count3Val]
-			uM[N - 1][i] = results1[(i + 1*(N-2)) % size][count3Val]
-			uM[i][0] = results1[(i + 2*(N-2)) % size][count3Val]
-			uM[i][N - 1] = results1[(i + 3*(N-2)) % size][count3Val]
+			uM[0][i] = results1[count3Mod][count3Val]
+			uM[N - 1][i] = results1[count3Mod][count3Val]
+			uM[i][0] = results1[count3Mod][count3Val]
+			uM[i][N - 1] = results1[count3Mod][count3Val]
 			count3 += 1
 
 	# This is the end of step 2
