@@ -124,7 +124,7 @@ for itera in range(T):
 	for i in range(1,N-1):
 		for j in range(0,4):
 			count23Val = count23/size
-			if rank == ((i-1) + (j-1)*(N-2)) % size:
+			if rank == ((i-1) + j*(N-2)) % size:
 				result1 = G * dataR1[count23Val]
 				result1List.append(result1)
 				count23 += 1
