@@ -121,14 +121,21 @@ for itera in range(T):
 	result1 = None
 	result1List = []
 	count23 = 0
-	for i in range(1,N-1):
-		for j in range(0,4):
-			count23Val = count23%size
-			if rank == ((i-1) + j*4) % size:
-				result1 = G * dataR1[count23Val]
-				result1List.append(result1)
-				count23 += 1
-				print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List))
+	# for i in range(1,N-1):
+	# 	for j in range(0,4):
+	# 		count23Val = count23/size
+	# 		if rank == ((i-1) + j*4) % size:
+	# 			result1 = G * dataR1[count23Val]
+	# 			result1List.append(result1)
+	# 			count23 += 1
+	# 			print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List))
+
+	for i in range(0,len(dataR1)):
+		count23Val = count23/size
+		result1 = G * dataR1[count23Val]
+		result1List.append(result1)
+		print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List))
+		count23 += 1
 
 	results1 = comm.gather(result1List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
