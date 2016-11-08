@@ -65,7 +65,7 @@ for itera in range(T):
 				result = ((p * (dataR[countVal][0] + dataR[countVal][1] + dataR[countVal][2] + dataR[countVal][3] - 4 * dataR[countVal][4])) + (2 * dataR[countVal][4]) - ((1-eta) * dataR[countVal][5])) / (1+eta)
 				resultList.append(result)
 				count += 1
-				print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList))
+				print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[countVal]))
 
 
 	results = comm.gather(resultList, root = 0)
