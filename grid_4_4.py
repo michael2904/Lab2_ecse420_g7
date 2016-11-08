@@ -96,7 +96,7 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 			print("")
-			
+
 	# This is the beginning of step 2
 
 	if rank == 0:
@@ -111,7 +111,7 @@ for itera in range(T):
 	else:
 		dataN1 = None
 
-	if rank == 0:
+	# if rank == 0:
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 
 	dataR1 = comm.scatter(dataN1,root = 0)
