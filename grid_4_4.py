@@ -144,10 +144,10 @@ for itera in range(T):
 		for i in range(1,N-1):
 			count3Mod = count3%size
 			count3Val = count3/size
-			uM[0][i] = results1[count3Mod][count3Val]
-			uM[N - 1][i] = results1[count3Mod][count3Val]
-			uM[i][0] = results1[count3Mod][count3Val]
-			uM[i][N - 1] = results1[count3Mod][count3Val]
+			uM[0][i] = results1[count3Val][count3Mod]
+			uM[N - 1][i] = results1[count3Val][count3Mod]
+			uM[i][0] = results1[count3Val][count3Mod]
+			uM[i][N - 1] = results1[count3Val][count3Mod]
 			count3 += 1
 
 	# This is the end of step 2
