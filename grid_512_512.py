@@ -78,7 +78,7 @@ for itera in range(T):
 	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
-		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
@@ -94,22 +94,22 @@ for itera in range(T):
 
 	# This is the end of step 1
 
-	if rank == 0:
-		print("u")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+	# if rank == 0:
+	# 	print("u")
+	# 	for i in range((N/2)-4,(N/2)+4):
+	# 		for j in range((N/2)-4,(N/2)+4):
+	# 			print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+	# 		print("")
+	# 	print("u1")
+	# 	for i in range((N/2)-4,(N/2)+4):
+	# 		for j in range((N/2)-4,(N/2)+4):
+	# 			print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+	# 		print("")
+	# 	print("u2")
+	# 	for i in range((N/2)-4,(N/2)+4):
+	# 		for j in range((N/2)-4,(N/2)+4):
+	# 			print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+	# 		print("")
 
 	# This is the beginning of step 2
 
@@ -118,7 +118,7 @@ for itera in range(T):
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
 			if (4*(N-2)/size) > 0 :
-				print(" ************* This is rank "+str(rank)+" and id is "+str(((i-1)*4 + 0)) +" / "+str(((4*(N-2)/size)+ (4*(N-2) % size > 0)))+" with result: "+str(((i-1)*4 + 0) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))))
+				# print(" ************* This is rank "+str(rank)+" and id is "+str(((i-1)*4 + 0)) +" / "+str(((4*(N-2)/size)+ (4*(N-2) % size > 0)))+" with result: "+str(((i-1)*4 + 0) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))))
 				dataN1[((i-1)*4 + 0) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))].append(uM[1][i])
 				dataN1[((i-1)*4 + 1) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))].append(uM[N - 2][i])
 				dataN1[((i-1)*4 + 2) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))].append(uM[i][1])
@@ -132,8 +132,8 @@ for itera in range(T):
 	else:
 		dataN1 = None
 
-	if rank == 0:
-		print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+	# if rank == 0:
+	# 	print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 
 	dataR1 = comm.scatter(dataN1,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
@@ -154,22 +154,22 @@ for itera in range(T):
 			if (4*(N-2)/size) > 0 :
 				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
 				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
-				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
+				# print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[0][i] = results1[count3Val][count3Mod]
 				count3 += 1
 				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
 				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
-				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
+				# print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[N - 1][i] = results1[count3Val][count3Mod]
 				count3 += 1
 				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
 				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
-				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
+				# print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[i][0] = results1[count3Val][count3Mod]
 				count3 += 1
 				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
 				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
-				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
+				# print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[i][N - 1] = results1[count3Val][count3Mod]
 				count3 += 1
 			else:
@@ -184,22 +184,22 @@ for itera in range(T):
 
 	# This is the end of step 2
 
-	if rank == 0:
-		print("u")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+	# if rank == 0:
+	# 	print("u")
+	# 	for i in range((N/2)-4,(N/2)+4):
+	# 		for j in range((N/2)-4,(N/2)+4):
+	# 			print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+	# 		print("")
+	# 	print("u1")
+	# 	for i in range((N/2)-4,(N/2)+4):
+	# 		for j in range((N/2)-4,(N/2)+4):
+	# 			print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+	# 		print("")
+	# 	print("u2")
+	# 	for i in range((N/2)-4,(N/2)+4):
+	# 		for j in range((N/2)-4,(N/2)+4):
+	# 			print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+	# 		print("")
 
 
 	# This is the beginning of step 3
@@ -269,16 +269,16 @@ for itera in range(T):
 			for j in range((N/2)-4,(N/2)+4):
 				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
 			print("")
-		print("u1")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+		# print("u1")
+		# for i in range((N/2)-4,(N/2)+4):
+		# 	for j in range((N/2)-4,(N/2)+4):
+		# 		print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+		# 	print("")
+		# print("u2")
+		# for i in range((N/2)-4,(N/2)+4):
+		# 	for j in range((N/2)-4,(N/2)+4):
+		# 		print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+		# 	print("")
 
 
 
