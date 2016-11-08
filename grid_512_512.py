@@ -35,7 +35,7 @@ for itera in range(T):
 	# This is beginning of step 1
 	if rank == 0:
 		dataN = [[] for _ in range(size)]
-		print(dataN)
+		# print(dataN)
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				if ((N-2)*(N-2)/size) > 0:
@@ -264,11 +264,11 @@ for itera in range(T):
 	if rank == 0:
 		u2M = deepcopy(u1M)
 		u1M = deepcopy(uM)
-		print("u")
-		for i in range((N/2)-4,(N/2)+4):
-			for j in range((N/2)-4,(N/2)+4):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
+		# print("u")
+		# for i in range((N/2)-4,(N/2)+4):
+		# 	for j in range((N/2)-4,(N/2)+4):
+		# 		print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+		# 	print("")
 		# print("u1")
 		# for i in range((N/2)-4,(N/2)+4):
 		# 	for j in range((N/2)-4,(N/2)+4):
@@ -279,6 +279,7 @@ for itera in range(T):
 		# 	for j in range((N/2)-4,(N/2)+4):
 		# 		print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 		# 	print("")
+		print("%.6f," % uM[i][j])
 
 
 
