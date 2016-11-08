@@ -49,7 +49,7 @@ for itera in range(T):
 					dataList.append(u1M[i][j])
 					dataList.append(u2M[i][j])
 					print(" ************* This is rank "+str(rank)+" and id is "+str((j-1)+(N-2)*(i-1)) +" / "+str(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))+" with result: "+str(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)))
-					dataN[((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)].append(dataList)
+					dataN[((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))].append(dataList)
 				else:
 					dataList = []
 					dataList.append(u1M[i-1][j])
