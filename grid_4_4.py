@@ -104,11 +104,17 @@ for itera in range(T):
 		dataN1 = [[] for _ in range(size)]
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
-			dataN1[((i-1)*4 + 0) / (4*(N-2)/size)].append(uM[1][i])
-			dataN1[((i-1)*4 + 1) / (4*(N-2)/size)].append(uM[N - 2][i])
-			dataN1[((i-1)*4 + 2) / (4*(N-2)/size)].append(uM[i][1])
-			dataN1[((i-1)*4 + 3) / (4*(N-2)/size)].append(uM[i][N-2])
-			print("*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+			if (4*(N-2)/size) > 0 :
+				dataN1[((i-1)*4 + 0) / (4*(N-2)/size)].append(uM[1][i])
+				dataN1[((i-1)*4 + 1) / (4*(N-2)/size)].append(uM[N - 2][i])
+				dataN1[((i-1)*4 + 2) / (4*(N-2)/size)].append(uM[i][1])
+				dataN1[((i-1)*4 + 3) / (4*(N-2)/size)].append(uM[i][N-2])
+				print(">0*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+			else:
+				dataN1[((i-1)*4 + 0)].append(uM[1][i])
+				dataN1[((i-1)*4 + 1)].append(uM[N - 2][i])
+				dataN1[((i-1)*4 + 2)].append(uM[i][1])
+				dataN1[((i-1)*4 + 3)].append(uM[i][N-2])
 	else:
 		dataN1 = None
 
