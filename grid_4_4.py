@@ -52,9 +52,9 @@ for itera in range(T):
 	else:
 		dataN = None
 
-	# print("This is rank "+str(rank)+" and dataN "+str(dataN))
+	print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	dataR = comm.scatter(dataN,root = 0)
-	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result = None
 	count = 0
 	resultList = []
@@ -80,7 +80,23 @@ for itera in range(T):
 				count2 += 1
 
 	# This is the end of step 1
-
+	if rank == 0:
+		print("u")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
+			
 	# This is the beginning of step 2
 
 	if rank == 0:
@@ -96,7 +112,7 @@ for itera in range(T):
 		dataN1 = None
 
 	if rank == 0:
-		print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 
 	dataR1 = comm.scatter(dataN1,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
@@ -116,7 +132,7 @@ for itera in range(T):
 	results1 = comm.gather(result1List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 	if rank == 0:
-		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 		count3 = 0
 		for i in range(1,N-1):
 			count3Val = count3/size
@@ -137,51 +153,36 @@ for itera in range(T):
 		dataN2[1 % size].append(uM[N - 2][0])
 		dataN2[2 % size].append(uM[0][N - 2])
 		dataN2[3 % size].append(uM[N - 1][N - 2])
-		print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
+		# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
 	else:
 		dataN2 = None
 
 	
 	dataR2 = comm.scatter(dataN2,root = 0)
-	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
+	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
 
 	result2 = None
 	count4 = 0
 	result2List = []
 	for i in range(0,len(dataR2)):
 		count4Val = count4/size
-		print("This is count4Val: "+str(count4Val)+" in rank "+str(rank))
+		# print("This is count4Val: "+str(count4Val)+" in rank "+str(rank))
 		result2 = G * dataR2[count4Val]
-		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2 "+str(result2))
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2 "+str(result2))
 		result2List.append(result2)
 		count4 += 1
 
-	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2List "+str(result2List))
+	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2List "+str(result2List))
 	results2 = comm.gather(result2List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results2))
 
 	if rank == 0:
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
-		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
 		count5 = 0
 		for i in range(0,4):
 			count5Val = count5/size
 			count5Mod = count5%size
-			print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
+			# print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
 			if i == 0:
 				uM[0][0] = results2[count5Mod][count5Val]
 			elif i == 1:
