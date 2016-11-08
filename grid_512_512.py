@@ -35,6 +35,7 @@ for itera in range(T):
 	# This is beginning of step 1
 	if rank == 0:
 		dataN = [[] for _ in range(size)]
+		print(dataN)
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				if ((N-2)*(N-2)/size) > 0:
@@ -46,8 +47,8 @@ for itera in range(T):
 					dataList.append(u1M[i][j+1])
 					dataList.append(u1M[i][j])
 					dataList.append(u2M[i][j])
-					dataN[((j-1)+(N-2)*(i-1)) / ((N-2)*(N-2)/size)].append(dataList)
-					# print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
+					# print(" ************* This is rank "+str(rank)+" and id is "+str((j-1)+(N-2)*(i-1)) +" / "+str(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))+" with result: "+str(((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))))
+					dataN[((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))].append(dataList)
 				else:
 					dataList = []
 					dataList.append(u1M[i-1][j])
@@ -61,7 +62,8 @@ for itera in range(T):
 	else:
 		dataN = None
 
-	# print("This is rank "+str(rank)+" and dataN "+str(dataN))
+	# if rank == 0:
+	# 	print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	dataR = comm.scatter(dataN,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result = None
@@ -76,13 +78,14 @@ for itera in range(T):
 	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
-		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
+		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				if ((N-2)*(N-2)/size) > 0 :
-					count2Mod = count2%(((N-2)*(N-2)/size))
-					count2Val = count2/(((N-2)*(N-2)/size))
+					count2Mod = count2%(((N-2)*(N-2)/size) + ((N-2)*(N-2) % size > 0))
+					count2Val = count2/(((N-2)*(N-2)/size) + ((N-2)*(N-2) % size > 0))
+					# print("these are the indexes: "+str(count2Val)+" and "+str(count2Mod))
 					uM[i][j] = results[count2Val][count2Mod]
 				else:
 					uM[i][j] = results[count2][0]
@@ -115,10 +118,11 @@ for itera in range(T):
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
 			if (4*(N-2)/size) > 0 :
-				dataN1[((i-1)*4 + 0) / (4*(N-2)/size)].append(uM[1][i])
-				dataN1[((i-1)*4 + 1) / (4*(N-2)/size)].append(uM[N - 2][i])
-				dataN1[((i-1)*4 + 2) / (4*(N-2)/size)].append(uM[i][1])
-				dataN1[((i-1)*4 + 3) / (4*(N-2)/size)].append(uM[i][N-2])
+				print(" ************* This is rank "+str(rank)+" and id is "+str(((i-1)*4 + 0)) +" / "+str(((4*(N-2)/size)+ (4*(N-2) % size > 0)))+" with result: "+str(((i-1)*4 + 0) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))))
+				dataN1[((i-1)*4 + 0) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))].append(uM[1][i])
+				dataN1[((i-1)*4 + 1) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))].append(uM[N - 2][i])
+				dataN1[((i-1)*4 + 2) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))].append(uM[i][1])
+				dataN1[((i-1)*4 + 3) / ((4*(N-2)/size)+ (4*(N-2) % size > 0))].append(uM[i][N-2])
 				# print(">0*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 			else:
 				dataN1[((i-1)*4 + 0)].append(uM[1][i])
@@ -128,8 +132,8 @@ for itera in range(T):
 	else:
 		dataN1 = None
 
-	# if rank == 0:
-		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+	if rank == 0:
+		print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 
 	dataR1 = comm.scatter(dataN1,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
@@ -148,20 +152,24 @@ for itera in range(T):
 		count3 = 0
 		for i in range(1,N-1):
 			if (4*(N-2)/size) > 0 :
-				count3Mod = count3%((4*(N-2)/size))
-				count3Val = count3/((4*(N-2)/size))
+				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
+				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
+				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[0][i] = results1[count3Val][count3Mod]
 				count3 += 1
-				count3Mod = count3%((4*(N-2)/size))
-				count3Val = count3/((4*(N-2)/size))
+				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
+				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
+				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[N - 1][i] = results1[count3Val][count3Mod]
 				count3 += 1
-				count3Mod = count3%((4*(N-2)/size))
-				count3Val = count3/((4*(N-2)/size))
+				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
+				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
+				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[i][0] = results1[count3Val][count3Mod]
 				count3 += 1
-				count3Mod = count3%((4*(N-2)/size))
-				count3Val = count3/((4*(N-2)/size))
+				count3Mod = count3%((4*(N-2)/size) + (4*(N-2) % size > 0))
+				count3Val = count3/((4*(N-2)/size) + (4*(N-2) % size > 0))
+				print("these are the indexes: "+str(count3Val)+" and "+str(count3Mod))
 				uM[i][N - 1] = results1[count3Val][count3Mod]
 				count3 += 1
 			else:
@@ -199,10 +207,10 @@ for itera in range(T):
 	if rank == 0:
 		dataN2 = [[] for _ in range(size)]
 		if (4*(N-2)/size) > 0 :
-			dataN2[0 / (4*(N-2)/size)].append(uM[1][0])
-			dataN2[1 / (4*(N-2)/size)].append(uM[N - 2][0])
-			dataN2[2 / (4*(N-2)/size)].append(uM[0][N - 2])
-			dataN2[3 / (4*(N-2)/size)].append(uM[N - 1][N - 2])
+			dataN2[0 / ((4*(N-2)/size) + (4*(N-2) % size > 0))].append(uM[1][0])
+			dataN2[1 / ((4*(N-2)/size) + (4*(N-2) % size > 0))].append(uM[N - 2][0])
+			dataN2[2 / ((4*(N-2)/size) + (4*(N-2) % size > 0))].append(uM[0][N - 2])
+			dataN2[3 / ((4*(N-2)/size) + (4*(N-2) % size > 0))].append(uM[N - 1][N - 2])
 			# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
 		else:
 			dataN2[0].append(uM[1][0])
@@ -230,8 +238,8 @@ for itera in range(T):
 		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
 		for i in range(0,4):
 			if (4*(N-2)/size) > 0 :
-				count5Mod = i%((4*(N-2)/size))
-				count5Val = i/((4*(N-2)/size))
+				count5Mod = i%((4*(N-2)/size) + (4*(N-2) % size > 0))
+				count5Val = i/((4*(N-2)/size) + (4*(N-2) % size > 0))
 				# print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
 				if i == 0:
 					uM[0][0] = results2[count5Val][count5Mod]
