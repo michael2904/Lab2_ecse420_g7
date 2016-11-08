@@ -31,7 +31,7 @@ if rank == 0:
 	u1M[N/2][N/2] = 1
 
 for itera in range(T):
-	print("This is iteration "+str(itera)+" in rank "+str(rank))
+	# print("This is iteration "+str(itera)+" in rank "+str(rank))
 	# This is beginning of step 1
 	if rank == 0:
 		dataN = [[] for _ in range(size)]
@@ -279,7 +279,7 @@ for itera in range(T):
 		# 	for j in range((N/2)-4,(N/2)+4):
 		# 		print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
 		# 	print("")
-		print("%.6f," % uM[i][j])
+		print("%.6f," % uM[N/2][N/2])
 
 
 

@@ -31,7 +31,7 @@ if rank == 0:
 	u1M[N/2][N/2] = 1
 
 for itera in range(T):
-	print("This is iteration "+str(itera)+" in rank "+str(rank))
+	# print("This is iteration "+str(itera)+" in rank "+str(rank))
 
 
 	# This is beginning of step 1
