@@ -23,7 +23,7 @@ eta = 0.0002
 
 print("This is the rank "+str(rank)+" with name "+str(name))
 
-N = 8
+N = 4
 if rank == 0:
 	uM = [[0 for x in range(N)] for y in range(N)]
 	u1M = [[0 for x in range(N)] for y in range(N)]
