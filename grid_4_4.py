@@ -247,7 +247,7 @@ for itera in range(T):
 				elif i == 2:
 					uM[0][N-1] = results2[i][0]
 				elif i == 3:
-					uM[N-1][N-1] = results2[i][]
+					uM[N-1][N-1] = results2[i][0]
 
 	# This is the end of step 3
 
