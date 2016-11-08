@@ -61,11 +61,11 @@ for itera in range(T):
 	for i in range(1,N-1):
 		for j in range(1,N-1):
 			if rank == ((i-1)+(N-2)*(j-1)) % size:
-				countVal = count%size
-				result = ((p * (dataR[countVal][0] + dataR[countVal][1] + dataR[countVal][2] + dataR[countVal][3] - 4 * dataR[countVal][4])) + (2 * dataR[countVal][4]) - ((1-eta) * dataR[countVal][5])) / (1+eta)
+				countVal = count/size
+				result = ((p * (dataR[count][0] + dataR[count][1] + dataR[count][2] + dataR[count][3] - 4 * dataR[count][4])) + (2 * dataR[count][4]) - ((1-eta) * dataR[count][5])) / (1+eta)
 				resultList.append(result)
 				count += 1
-				print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[countVal]))
+				print("----------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[count]))
 
 
 	results = comm.gather(resultList, root = 0)
@@ -75,7 +75,7 @@ for itera in range(T):
 		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				count2Val = count2%size
+				count2Val = count2/size
 				uM[i][j] = results[((i-1)+(N-2)*(j-1)) % size][count2Val]
 				count2 += 1
 
