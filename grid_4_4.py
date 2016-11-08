@@ -23,7 +23,7 @@ eta = 0.0002
 
 print("This is the rank "+str(rank)+" with name "+str(name))
 
-N = 4
+N = 8
 if rank == 0:
 	uM = [[0 for x in range(N)] for y in range(N)]
 	u1M = [[0 for x in range(N)] for y in range(N)]
@@ -49,7 +49,7 @@ for itera in range(T):
 					dataList.append(u1M[i][j])
 					dataList.append(u2M[i][j])
 					dataN[((i-1)+(N-2)*(j-1)) / ((N-2)*(N-2)/size)].append(dataList)
-					print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
+					# print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
 				else:
 					dataList = []
 					dataList.append(u1M[i-1][j])
@@ -59,7 +59,7 @@ for itera in range(T):
 					dataList.append(u1M[i][j])
 					dataList.append(u2M[i][j])
 					dataN[((i-1)+(N-2)*(j-1))].append(dataList)
-					print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
+					# print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
 
