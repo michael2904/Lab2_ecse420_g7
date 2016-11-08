@@ -108,7 +108,7 @@ for itera in range(T):
 			dataN1[((i-1)*4 + 1) / (4*(N-2)/size)].append(uM[N - 2][i])
 			dataN1[((i-1)*4 + 2) / (4*(N-2)/size)].append(uM[i][1])
 			dataN1[((i-1)*4 + 3) / (4*(N-2)/size)].append(uM[i][N-2])
-			# print("*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+			print("*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 	else:
 		dataN1 = None
 
