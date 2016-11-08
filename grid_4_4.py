@@ -48,13 +48,13 @@ for itera in range(T):
 				dataList.append(u1M[i][j])
 				dataList.append(u2M[i][j])
 				dataN[((i-1)+(N-2)*(j-1)) % size].append(dataList)
-				print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
+				# print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
 
-	print("This is rank "+str(rank)+" and dataN "+str(dataN))
+	# print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	dataR = comm.scatter(dataN,root = 0)
-	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
+	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result = None
 	count = 0
 	resultList = []
@@ -64,14 +64,14 @@ for itera in range(T):
 				countVal = count/size
 				result = ((p * (dataR[count][0] + dataR[count][1] + dataR[count][2] + dataR[count][3] - 4 * dataR[count][4])) + (2 * dataR[count][4]) - ((1-eta) * dataR[count][5])) / (1+eta)
 				resultList.append(result)
-				print("----------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[count]))
+				# print("----------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[count]))
 				count += 1
 
 
 	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
-		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
@@ -108,7 +108,7 @@ for itera in range(T):
 			dataN1[(i + 1*(N-2)) % size].append(uM[N - 2][i])
 			dataN1[(i + 2*(N-2)) % size].append(uM[i][1])
 			dataN1[(i + 3*(N-2)) % size].append(uM[i][N-2])
-			# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+			print("*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 	else:
 		dataN1 = None
 
@@ -116,7 +116,7 @@ for itera in range(T):
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 
 	dataR1 = comm.scatter(dataN1,root = 0)
-	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
+	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
 
 	result1 = None
 	result1List = []
@@ -128,12 +128,12 @@ for itera in range(T):
 				result1 = G * dataR1[count23Val]
 				result1List.append(result1)
 				count23 += 1
-				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
+				print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
 
 	results1 = comm.gather(result1List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 	if rank == 0:
-		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
+		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 		count3 = 0
 		for i in range(1,N-1):
 			count3Val = count3/size
@@ -144,7 +144,22 @@ for itera in range(T):
 			count3 += 1
 
 	# This is the end of step 2
-
+	if rank == 0:
+		print("u")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+			print("")
+		print("u1")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
 	# This is the beginning of step 3
 
 	if rank == 0:
