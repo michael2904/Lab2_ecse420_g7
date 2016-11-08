@@ -23,7 +23,7 @@ eta = 0.0002
 
 print("This is the rank "+str(rank)+" with name "+str(name))
 
-N = 6
+N = 8
 if rank == 0:
 	uM = [[0 for x in range(N)] for y in range(N)]
 	u1M = [[0 for x in range(N)] for y in range(N)]
@@ -63,8 +63,8 @@ for itera in range(T):
 	else:
 		dataN = None
 
-	if rank == 0:
-		print("This is rank "+str(rank)+" and dataN "+str(dataN))
+	# if rank == 0:
+	# 	print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	dataR = comm.scatter(dataN,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result = None
@@ -79,7 +79,7 @@ for itera in range(T):
 	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
-		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
@@ -94,22 +94,22 @@ for itera in range(T):
 
 	# This is the end of step 1
 
-	if rank == 0:
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+	# if rank == 0:
+	# 	print("u")
+	# 	for i in range(0,N):
+	# 		for j in range(0,N):
+	# 			print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+	# 		print("")
+	# 	print("u1")
+	# 	for i in range(0,N):
+	# 		for j in range(0,N):
+	# 			print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+	# 		print("")
+	# 	print("u2")
+	# 	for i in range(0,N):
+	# 		for j in range(0,N):
+	# 			print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+	# 		print("")
 
 	# This is the beginning of step 2
 
@@ -179,22 +179,22 @@ for itera in range(T):
 
 	# This is the end of step 2
 
-	if rank == 0:
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+	# if rank == 0:
+	# 	print("u")
+	# 	for i in range(0,N):
+	# 		for j in range(0,N):
+	# 			print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
+	# 		print("")
+	# 	print("u1")
+	# 	for i in range(0,N):
+	# 		for j in range(0,N):
+	# 			print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+	# 		print("")
+	# 	print("u2")
+	# 	for i in range(0,N):
+	# 		for j in range(0,N):
+	# 			print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+	# 		print("")
 
 
 	# This is the beginning of step 3
@@ -264,16 +264,16 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
 			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+		# print("u1")
+		# for i in range(0,N):
+		# 	for j in range(0,N):
+		# 		print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+		# 	print("")
+		# print("u2")
+		# for i in range(0,N):
+		# 	for j in range(0,N):
+		# 		print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+		# 	print("")
 
 
 
