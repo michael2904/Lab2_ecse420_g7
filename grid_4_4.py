@@ -76,7 +76,7 @@ for itera in range(T):
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				count2Val = count2/size
-				uM[i][j] = results[count2Val][((i-1)+(N-2)*(j-1)) % size]
+				uM[i][j] = results[((i-1)+(N-2)*(j-1)) % size][count2Val]
 				count2 += 1
 
 	# This is the end of step 1
