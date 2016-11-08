@@ -152,7 +152,7 @@ for itera in range(T):
 		if rank == i % size:
 			result2 = G * dataR2[count4Val]
 			result2List.append(result2)
-			count4 += 1
+		count4 += 1
 
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2List "+str(result2List))
 	results2 = comm.gather(result2List, root = 0)
@@ -179,6 +179,7 @@ for itera in range(T):
 		for i in range(0,4):
 			count5Val = count5/size
 			count5Mod = count5%size
+			print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
 			if i == 0:
 				uM[0][0] = results2[count5Val][count5Mod]
 			elif i == 1:
