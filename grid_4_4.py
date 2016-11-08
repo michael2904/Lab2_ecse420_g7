@@ -108,7 +108,7 @@ for itera in range(T):
 			dataN1[((i-1)*4 + 1) / (4*(N-2)/size)].append(uM[N - 2][i])
 			dataN1[((i-1)*4 + 2) / (4*(N-2)/size)].append(uM[i][1])
 			dataN1[((i-1)*4 + 3) / (4*(N-2)/size)].append(uM[i][N-2])
-			print("*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+			# print("*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 	else:
 		dataN1 = None
 
@@ -116,7 +116,7 @@ for itera in range(T):
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 
 	dataR1 = comm.scatter(dataN1,root = 0)
-	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
+	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
 
 	result1 = None
 	result1List = []
@@ -133,18 +133,18 @@ for itera in range(T):
 	for i in range(0,len(dataR1)):
 		result1 = G * dataR1[i]
 		result1List.append(result1)
-		print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List)+" with this dataR1: "+str(dataR1))
+		# print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List)+" with this dataR1: "+str(dataR1))
 		count23 += 1
 
 	results1 = comm.gather(result1List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 	if rank == 0:
-		print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 		count3 = 0
 		for i in range(1,N-1):
 			count3Mod = count3%((4*(N-2)/size))
 			count3Val = count3/((4*(N-2)/size))
-			print("This is count3Mod: "+str(count3Mod)+" and this is count3Val: "+str(count3Val))
+			# print("This is count3Mod: "+str(count3Mod)+" and this is count3Val: "+str(count3Val))
 			uM[0][i] = results1[count3Val][count3Mod]
 			count3 += 1
 			count3Mod = count3%((4*(N-2)/size))
@@ -182,10 +182,10 @@ for itera in range(T):
 	if rank == 0:
 		dataN2 = [[] for _ in range(size)]
 
-		dataN2[0 % size].append(uM[1][0])
-		dataN2[1 % size].append(uM[N - 2][0])
-		dataN2[2 % size].append(uM[0][N - 2])
-		dataN2[3 % size].append(uM[N - 1][N - 2])
+		dataN2[0 / (4*(N-2)/size)].append(uM[1][0])
+		dataN2[1 / (4*(N-2)/size)].append(uM[N - 2][0])
+		dataN2[2 / (4*(N-2)/size)].append(uM[0][N - 2])
+		dataN2[3 / (4*(N-2)/size)].append(uM[N - 1][N - 2])
 		# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
 	else:
 		dataN2 = None
@@ -195,15 +195,10 @@ for itera in range(T):
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
 
 	result2 = None
-	count4 = 0
 	result2List = []
 	for i in range(0,len(dataR2)):
-		count4Val = count4/size
-		# print("This is count4Val: "+str(count4Val)+" in rank "+str(rank))
-		result2 = G * dataR2[count4Val]
-		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2 "+str(result2))
+		result2 = G * dataR2[i]
 		result2List.append(result2)
-		count4 += 1
 
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2List "+str(result2List))
 	results2 = comm.gather(result2List, root = 0)
@@ -211,20 +206,18 @@ for itera in range(T):
 
 	if rank == 0:
 		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
-		count5 = 0
 		for i in range(0,4):
-			count5Val = count5/size
-			count5Mod = count5%size
+			count5Mod = i%((4*(N-2)/size))
+			count5Val = i/((4*(N-2)/size))
 			# print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
 			if i == 0:
-				uM[0][0] = results2[count5Mod][count5Val]
+				uM[0][0] = results2[count5Val][count5Mod]
 			elif i == 1:
-				uM[N-1][0] = results2[count5Mod][count5Val]
+				uM[N-1][0] = results2[count5Val][count5Mod]
 			elif i == 2:
-				uM[0][N-1] = results2[count5Mod][count5Val]
+				uM[0][N-1] = results2[count5Val][count5Mod]
 			elif i == 3:
-				uM[N-1][N-1] = results2[count5Mod][count5Val]
-			count5 += 1
+				uM[N-1][N-1] = results2[count5Val][count5Mod]
 
 	# This is the end of step 3
 
