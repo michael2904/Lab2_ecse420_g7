@@ -47,7 +47,7 @@ for itera in range(T):
 				dataList.append(u1M[i][j+1])
 				dataList.append(u1M[i][j])
 				dataList.append(u2M[i][j])
-				dataN[(i+(N-2)*j) % size].append(dataList)
+				dataN[((i-1)+(N-2)*(j-1)) % size].append(dataList)
 				print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
@@ -60,7 +60,7 @@ for itera in range(T):
 	resultList = []
 	for i in range(1,N-1):
 		for j in range(1,N-1):
-			if rank == (i+(N-2)*j) % size:
+			if rank == ((i-1)+(N-2)*(j-1)) % size:
 				countVal = count/size
 				result = ((p * (dataR[countVal][0] + dataR[countVal][1] + dataR[countVal][2] + dataR[countVal][3] - 4 * dataR[countVal][4])) + (2 * dataR[countVal][4]) - ((1-eta) * dataR[countVal][5])) / (1+eta)
 				resultList.append(result)
@@ -76,7 +76,7 @@ for itera in range(T):
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				count2Val = count2/size
-				uM[i][j] = results[(i+(N-2)*j) % size][count2Val]
+				uM[i][j] = results[((i-1)+(N-2)*(j-1)) % size][count2Val]
 				count2 += 1
 
 	# This is the end of step 1
