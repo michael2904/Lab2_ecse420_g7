@@ -85,7 +85,7 @@ for itera in range(T):
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				if ((N-2)*(N-2)/size) > 0 :
-					count2Mod = count2%((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)
+					count2Mod = count2%((N-2)*(N-2)/size)
 					count2Val = count2/((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)
 					print("these are the indexes: "+str(count2Val)+" and "+str(count2Mod))
 					uM[i][j] = results[count2Val][count2Mod]
