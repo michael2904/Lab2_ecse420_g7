@@ -81,22 +81,7 @@ for itera in range(T):
 				count2 += 1
 
 	# This is the end of step 1
-	if rank == 0:
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+
 
 	# This is the beginning of step 2
 
@@ -126,21 +111,10 @@ for itera in range(T):
 
 	result1 = None
 	result1List = []
-	count23 = 0
-	# for i in range(1,N-1):
-	# 	for j in range(0,4):
-	# 		count23Val = count23/size
-	# 		if rank == ((i-1) + j*4) % size:
-	# 			result1 = G * dataR1[count23Val]
-	# 			result1List.append(result1)
-	# 			count23 += 1
-	# 			print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List))
-
 	for i in range(0,len(dataR1)):
 		result1 = G * dataR1[i]
 		result1List.append(result1)
 		# print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List)+" with this dataR1: "+str(dataR1))
-		count23 += 1
 
 	results1 = comm.gather(result1List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
@@ -176,22 +150,8 @@ for itera in range(T):
 				count3 += 1
 
 	# This is the end of step 2
-	if rank == 0:
-		print("u")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
-			print("")
-		print("u1")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-			print("")
-		print("u2")
-		for i in range(0,N):
-			for j in range(0,N):
-				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-			print("")
+
+
 	# This is the beginning of step 3
 
 	if rank == 0:

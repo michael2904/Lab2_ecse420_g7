@@ -32,105 +32,182 @@ if rank == 0:
 
 for itera in range(T):
 	print("This is iteration "+str(itera)+" in rank "+str(rank))
+	# This is beginning of step 1
 	if rank == 0:
 		dataN = [[] for _ in range(size)]
 		for i in range(1,N-1):
 			for j in range(1,N-1):
 				# print("This is rank "+str(rank)+" and u1M "+str(u1M)+" and u1M[i-1][j] ="+str(u1M[i-1][j]))
-				dataN[(i+(N-2)*j) % size].append(u1M[i-1][j])
-				dataN[(i+(N-2)*j) % size].append(u1M[i+1][j])
-				dataN[(i+(N-2)*j) % size].append(u1M[i][j-1])
-				dataN[(i+(N-2)*j) % size].append(u1M[i][j+1])
-				dataN[(i+(N-2)*j) % size].append(u1M[i][j])
-				dataN[(i+(N-2)*j) % size].append(u2M[i][j])
-				# print("This is rank "+str(rank)+" and dataN "+str(dataN))
+				dataList = []
+				dataList.append(u1M[i-1][j])
+				dataList.append(u1M[i+1][j])
+				dataList.append(u1M[i][j-1])
+				dataList.append(u1M[i][j+1])
+				dataList.append(u1M[i][j])
+				dataList.append(u2M[i][j])
+				dataN[((i-1)+(N-2)*(j-1)) % size].append(dataList)
+				# print(" ************* This is rank "+str(rank)+" and dataN "+str(dataN))
 	else:
 		dataN = None
 
-	if rank == 0:
-		print("This is rank "+str(rank)+" and dataN "+str(dataN))
-
+	# print("This is rank "+str(rank)+" and dataN "+str(dataN))
 	dataR = comm.scatter(dataN,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result = None
+	count = 0
+	resultList = []
 	for i in range(1,N-1):
 		for j in range(1,N-1):
-			if rank == (i+(N-2)*j) % size:
-				result = ((p * (dataR[0] + dataR[1] + dataR[2] + dataR[3] - 4 * dataR[4])) + (2 * dataR[4]) - ((1-eta) * dataR[5])) / (1+eta)
-				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result "+str(result)+" at i,j "+str(i)+","+str(j))
+			if rank == ((i-1)+(N-2)*(j-1)) % size:
+				countVal = count/size
+				result = ((p * (dataR[count][0] + dataR[count][1] + dataR[count][2] + dataR[count][3] - 4 * dataR[count][4])) + (2 * dataR[count][4]) - ((1-eta) * dataR[count][5])) / (1+eta)
+				resultList.append(result)
+				# print("----------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[count]))
+				count += 1
 
 
-	results = comm.gather(result, root = 0)
+	results = comm.gather(resultList, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
 	if rank == 0:
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(results))
+		count2 = 0
 		for i in range(1,N-1):
 			for j in range(1,N-1):
-				uM[i][j] = results[(i+(N-2)*j) % size]
+				count2Mod = count2%size
+				count2Val = count2/size
+				uM[i][j] = results[count2Mod][count2Val]
+				count2 += 1
+
+	# This is the end of step 1
+
+
+	# This is the beginning of step 2
 
 	if rank == 0:
-		dataN1 = [None for _ in range(size)]
+		dataN1 = [[] for _ in range(size)]
 		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 		for i in range(1,N-1):
-			dataN1[(i + 0*(N-2)) % size] = (uM[1][i])
-			dataN1[(i + 1*(N-2)) % size] = (uM[N - 2][i])
-			dataN1[(i + 2*(N-2)) % size] = (uM[i][1])
-			dataN1[(i + 3*(N-2)) % size] = (uM[i][N-2])
-			# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+			if (4*(N-2)/size) > 0 :
+				dataN1[((i-1)*4 + 0) / (4*(N-2)/size)].append(uM[1][i])
+				dataN1[((i-1)*4 + 1) / (4*(N-2)/size)].append(uM[N - 2][i])
+				dataN1[((i-1)*4 + 2) / (4*(N-2)/size)].append(uM[i][1])
+				dataN1[((i-1)*4 + 3) / (4*(N-2)/size)].append(uM[i][N-2])
+				# print(">0*********This is rank "+str(rank)+" and dataN1 "+str(dataN1))
+			else:
+				dataN1[((i-1)*4 + 0)].append(uM[1][i])
+				dataN1[((i-1)*4 + 1)].append(uM[N - 2][i])
+				dataN1[((i-1)*4 + 2)].append(uM[i][1])
+				dataN1[((i-1)*4 + 3)].append(uM[i][N-2])
 	else:
 		dataN1 = None
 
+	# if rank == 0:
+		# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 
-	# print("This is rank "+str(rank)+" and dataN1 "+str(dataN1))
 	dataR1 = comm.scatter(dataN1,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 1 "+str(dataR1))
 
 	result1 = None
-	for i in range(1,N-1):
-		for j in range(0,N):
-			if rank == (i + j*(N-2)) % size:
-				result1 = G * dataR1
-				# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1 "+str(result1)+" at i,j "+str(i)+","+str(j))
+	result1List = []
+	for i in range(0,len(dataR1)):
+		result1 = G * dataR1[i]
+		result1List.append(result1)
+		# print("---------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result1List "+str(result1List)+" with this dataR1: "+str(dataR1))
 
-	results1 = comm.gather(result1, root = 0)
+	results1 = comm.gather(result1List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
 	if rank == 0:
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results1))
+		count3 = 0
 		for i in range(1,N-1):
-			uM[0][i] = results1[(i + 0*(N-2)) % size]
-			uM[N - 1][i] = results1[(i + 1*(N-2)) % size]
-			uM[i][0] = results1[(i + 2*(N-2)) % size]
-			uM[i][N - 1] = results1[(i + 3*(N-2)) % size]
+			if (4*(N-2)/size) > 0 :
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[0][i] = results1[count3Val][count3Mod]
+				count3 += 1
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[N - 1][i] = results1[count3Val][count3Mod]
+				count3 += 1
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[i][0] = results1[count3Val][count3Mod]
+				count3 += 1
+				count3Mod = count3%((4*(N-2)/size))
+				count3Val = count3/((4*(N-2)/size))
+				uM[i][N - 1] = results1[count3Val][count3Mod]
+				count3 += 1
+			else:
+				uM[0][i] = results1[count3][0]
+				count3 += 1
+				uM[N - 1][i] = results1[count3][0]
+				count3 += 1
+				uM[i][0] = results1[count3][0]
+				count3 += 1
+				uM[i][N - 1] = results1[count3][0]
+				count3 += 1
+
+	# This is the end of step 2
+
+
+	# This is the beginning of step 3
 
 	if rank == 0:
-		dataN2 = [None for _ in range(size)]
-		dataN2[0] = uM[1][0]
-		dataN2[1] = uM[N - 2][0]
-		dataN2[2] = uM[0][N - 2]
-		dataN2[3] = uM[N - 1][N - 2]
+		dataN2 = [[] for _ in range(size)]
+		if (4*(N-2)/size) > 0 :
+			dataN2[0 / (4*(N-2)/size)].append(uM[1][0])
+			dataN2[1 / (4*(N-2)/size)].append(uM[N - 2][0])
+			dataN2[2 / (4*(N-2)/size)].append(uM[0][N - 2])
+			dataN2[3 / (4*(N-2)/size)].append(uM[N - 1][N - 2])
+			# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
+		else:
+			dataN2[0].append(uM[1][0])
+			dataN2[1].append(uM[N - 2][0])
+			dataN2[2].append(uM[0][N - 2])
+			dataN2[3].append(uM[N - 1][N - 2])
 	else:
 		dataN2 = None
 
-	# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
+	
 	dataR2 = comm.scatter(dataN2,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
 
 	result2 = None
-	if rank == 0:
-		result2 = G * dataR2
-	elif rank == 1:
-		result2 = G * dataR2
-	elif rank == 2:
-		result2 = G * dataR2
-	elif rank == 3:
-		result2 = G * dataR2
+	result2List = []
+	for i in range(0,len(dataR2)):
+		result2 = G * dataR2[i]
+		result2List.append(result2)
 
-	results2 = comm.gather(result2, root = 0)
+	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2List "+str(result2List))
+	results2 = comm.gather(result2List, root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results1 "+str(results2))
 
 	if rank == 0:
-		uM[0][0] = results2[0]
-		uM[N-1][0] = results2[1]
-		uM[0][N-1] = results2[2]
-		uM[N-1][N-1] = results2[3]
+		# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results2 "+str(results2))
+		for i in range(0,4):
+			if (4*(N-2)/size) > 0 :
+				count5Mod = i%((4*(N-2)/size))
+				count5Val = i/((4*(N-2)/size))
+				# print("This is count5Val: "+str(count5Val)+" and this is count5Mod: "+str(count5Mod))
+				if i == 0:
+					uM[0][0] = results2[count5Val][count5Mod]
+				elif i == 1:
+					uM[N-1][0] = results2[count5Val][count5Mod]
+				elif i == 2:
+					uM[0][N-1] = results2[count5Val][count5Mod]
+				elif i == 3:
+					uM[N-1][N-1] = results2[count5Val][count5Mod]
+			else:
+				if i == 0:
+					uM[0][0] = results2[i][0]
+				elif i == 1:
+					uM[N-1][0] = results2[i][0]
+				elif i == 2:
+					uM[0][N-1] = results2[i][0]
+				elif i == 3:
+					uM[N-1][N-1] = results2[i][0]
+
+	# This is the end of step 3
 
 	if rank == 0:
 		u2M = deepcopy(u1M)
