@@ -137,10 +137,11 @@ for itera in range(T):
 		dataN2[1 % size].append(uM[N - 2][0])
 		dataN2[2 % size].append(uM[0][N - 2])
 		dataN2[3 % size].append(uM[N - 1][N - 2])
+		print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
 	else:
 		dataN2 = None
 
-	# print("This is rank "+str(rank)+" and dataN2 "+str(dataN2))
+	
 	dataR2 = comm.scatter(dataN2,root = 0)
 	print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received 2 "+str(dataR2))
 
@@ -149,8 +150,10 @@ for itera in range(T):
 	result2List = []
 	for i in range(0,len(dataR2)):
 		count4Val = count4/size
+		print("This is count4Val: "+str(count4Val)+" in rank "+str(rank))
 		if rank == i % size:
 			result2 = G * dataR2[count4Val]
+			print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the result2 "+str(result2))
 			result2List.append(result2)
 		count4 += 1
 
