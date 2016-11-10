@@ -33,9 +33,9 @@ u1M = [[((x+y*divR)+rank*divC*divR) for x in range(divC)] for y in range(divR)]
 u2M = [[((x+y*divR)+rank*divC*divR) for x in range(divC)] for y in range(divR)]
 
 initInd = (N/2)+(N/2)*N
-locIndI = initInd / divR
 locIndJ = initInd % divC
-print (" initInd is "+str(initInd)+" locIndI is "+str(locIndI)+" locIndJ is "+str(locIndJ))
+locIndI = (initInd - locIndJ)/ divR
+print ("initInd is "+str(initInd)+" locIndI is "+str(locIndI)+" locIndJ is "+str(locIndJ))
 if rank == 0:
 	u1M[0][0] = 1
 print u1M
