@@ -49,7 +49,7 @@ for itera in range(T):
 					dataList.append(u1M[i][j+1])
 					dataList.append(u1M[i][j])
 					dataList.append(u2M[i][j])
-					# print(" ************* This is rank "+str(rank)+" and id is "+str((j-1)+(N-2)*(i-1)) +" / "+str(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))+" with result: "+str(((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))))
+					print(" ************* id is "+str((j-1)+(N-2)*(i-1)) +" / "+str(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))+" with result: "+str(((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)))+" and i am putting this to dataN at that location: "+str(dataList))
 					dataN[((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))].append(dataList)
 				else:
 					dataList = []
@@ -238,16 +238,16 @@ for itera in range(T):
 			for j in range(0,N):
 				print('u('+str(i)+","+str(j)+") : "+str(uM[i][j])+" |"),
 			print("")
-		# print("u1")
-		# for i in range(0,N):
-		# 	for j in range(0,N):
-		# 		print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
-		# 	print("")
-		# print("u2")
-		# for i in range(0,N):
-		# 	for j in range(0,N):
-		# 		print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
-		# 	print("")
+		print("u1")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u1('+str(i)+","+str(j)+") : "+str(u1M[i][j])+" |"),
+			print("")
+		print("u2")
+		for i in range(0,N):
+			for j in range(0,N):
+				print('u2('+str(i)+","+str(j)+") : "+str(u2M[i][j])+" |"),
+			print("")
 
 
 
