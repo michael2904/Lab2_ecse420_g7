@@ -24,9 +24,15 @@ eta = 0.0002
 print("This is the rank "+str(rank)+" with name "+str(name))
 
 N = 4
-uM = [[0 for x in range(N)] for y in range(N/size + (N%size >0))]
-u1M = [[0 for x in range(N)] for y in range(N/size + (N%size >0))]
-u2M = [[0 for x in range(N)] for y in range(N/size + (N%size >0))]
+if N<= size:
+	divC = N * N /size
+	divR = N /size
+else:
+	divC = N * N /size
+	divR = N / size
+uM = [[0 for x in range(divC)] for y in range(divR)]
+u1M = [[0 for x in range(divC)] for y in range(divR)]
+u2M = [[0 for x in range(divC)] for y in range(divR)]
 if rank == 0:
 	u1M[0][0] = 1
 print u1M
