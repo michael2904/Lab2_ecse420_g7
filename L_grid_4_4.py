@@ -25,8 +25,8 @@ print("This is the rank "+str(rank)+" with name "+str(name))
 
 N = 4
 if N<= size:
-	divC = N * N /size
-	divR = N /size
+	divC = (N * N /size) % N
+	divR = N /size + (N % size >0)
 else:
 	divC = N * N /size
 	divR = N / size
