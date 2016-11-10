@@ -25,14 +25,14 @@ print("This is the rank "+str(rank)+" with name "+str(name))
 
 N = 4
 if N<= size:
-	divC = (N * N /size) % N
+	divC = (N * N /size) % (N+1)
 	divR = N /size + (N % size >0)
 else:
-	divC = N * N /size
-	divR = N / size
-uM = [[0 for x in range(divC)] for y in range(divR)]
-u1M = [[0 for x in range(divC)] for y in range(divR)]
-u2M = [[0 for x in range(divC)] for y in range(divR)]
+	divC = (N * N /size) % (N+1)
+	divR = N /size + (N % size >0)
+uM = [[(x+y*divR) for x in range(divC)] for y in range(divR)]
+u1M = [[(x+y*divR) for x in range(divC)] for y in range(divR)]
+u2M = [[(x+y*divR) for x in range(divC)] for y in range(divR)]
 if rank == 0:
 	u1M[0][0] = 1
 print u1M
