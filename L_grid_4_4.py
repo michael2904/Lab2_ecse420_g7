@@ -24,12 +24,8 @@ eta = 0.0002
 print("This is the rank "+str(rank)+" with name "+str(name))
 
 N = 4
-if N<= size:
-	divC = (N * N /size) % (N)
-	divR = N /size + (N % size >0)
-else:
-	divC = (N * N /size) % (N)
-	divR = N /size + (N % size >0)
+divR = N /size + (N % size >0)
+divC = (N * N /size) / divR
 
 print("This is divC "+str(divC)+" and this is divR "+str(divR))
 uM = [[((x+y*divR)+rank*divC*divR) for x in range(divC)] for y in range(divR)]
