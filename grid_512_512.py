@@ -9,8 +9,11 @@ from PIL import Image
 from math import exp
 from copy import copy,deepcopy
 import sys
+import time
 
 T = int(sys.argv[1])
+
+startTime = time.time()
 
 comm = MPI.COMM_WORLD
 size = MPI.COMM_WORLD.Get_size()
@@ -20,6 +23,8 @@ name = MPI.Get_processor_name()
 p = 0.5
 G = 0.75
 eta = 0.0002
+
+
 
 print("This is the rank "+str(rank)+" with name "+str(name))
 
@@ -281,6 +286,11 @@ for itera in range(T):
 		# 	print("")
 		print("%.6f," % uM[N/2][N/2])
 
+endTime = time.time()
+delta = endTime - startTime
+
+
+print("TIME ELAPSED : " + str (delta) )
 
 
 
