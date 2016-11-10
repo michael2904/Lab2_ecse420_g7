@@ -49,8 +49,8 @@ for itera in range(T):
 					dataList.append(u1M[i][j+1])
 					dataList.append(u1M[i][j])
 					dataList.append(u2M[i][j])
-					print(" ************* id is "+str((j-1)+(N-2)*(i-1)) +" / "+str(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))+" with result: "+str(((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)))+" and i am putting this to dataN at that location: "+str(dataList))
 					dataN[((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))].append(dataList)
+					print(" ************* id is "+str((j-1)+(N-2)*(i-1)) +" / "+str(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0))+" with result: "+str(((j-1)+(N-2)*(i-1))/(((N-2)*(N-2)/size)+ ((N-2)*(N-2) % size > 0)))+" and here is dataN: "+str(dataN))
 				else:
 					dataList = []
 					dataList.append(u1M[i-1][j])
@@ -69,12 +69,11 @@ for itera in range(T):
 	dataR = comm.scatter(dataN,root = 0)
 	# print("This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the data received "+str(dataR))
 	result = None
-	count = 0
 	resultList = []
 	for i in range(0,len(dataR)):
 		result = ((p * (dataR[i][0] + dataR[i][1] + dataR[i][2] + dataR[i][3] - 4 * dataR[i][4])) + (2 * dataR[i][4]) - ((1-eta) * dataR[i][5])) / (1+eta)
 		resultList.append(result)
-		# print("----------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[count]))
+		print("----------This is iteration "+str(itera)+" in rank "+str(rank)+" and here is the results 1 "+str(resultList)+" with dataR "+str(dataR[i]))
 
 
 	results = comm.gather(resultList, root = 0)
