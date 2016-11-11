@@ -32,7 +32,7 @@ N = 4
 if rank == 0:
 	# This is the print to copy the format in output.h
 	print("float output[2000] = {")
-	
+
 	uM = [[0 for x in range(N)] for y in range(N)]
 	u1M = [[0 for x in range(N)] for y in range(N)]
 	u2M = [[0 for x in range(N)] for y in range(N)]
@@ -219,7 +219,7 @@ for itera in range(T):
 		if itera < T-1:
 			print("%.6f," % uM[N/2][N/2])
 		else:
-			print("%.6f}" % uM[N/2][N/2])
+			print("%.6f\n};" % uM[N/2][N/2])
 
 
 
