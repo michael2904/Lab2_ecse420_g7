@@ -216,7 +216,10 @@ for itera in range(T):
 	if rank == 0:
 		u2M = deepcopy(u1M)
 		u1M = deepcopy(uM)
-		print("%.6f," % uM[N/2][N/2])
+		if itera < T-1:
+			print("%.6f," % uM[N/2][N/2])
+		else:
+			print("%.6f}" % uM[N/2][N/2])
 
 
 
