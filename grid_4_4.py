@@ -26,12 +26,13 @@ G = 0.75
 eta = 0.0002
 
 N = 4
-# This is the print to copy the format in output.h
-print("float output[2000] = {")
 
 
 # Here, I am setting up the 3 grids on the first process
 if rank == 0:
+	# This is the print to copy the format in output.h
+	print("float output[2000] = {")
+	
 	uM = [[0 for x in range(N)] for y in range(N)]
 	u1M = [[0 for x in range(N)] for y in range(N)]
 	u2M = [[0 for x in range(N)] for y in range(N)]
