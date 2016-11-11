@@ -221,7 +221,7 @@ for itera in range(T):
 		if itera < T-1:
 			print("%.6f," % uM[N/2][N/2])
 		else:
-			print("%.6f\n;}" % uM[N/2][N/2])
+			print("%.6f\n};" % uM[N/2][N/2])
 
 
 
