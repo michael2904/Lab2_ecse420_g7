@@ -34,7 +34,7 @@ u2M = [[((x+y*divR)+rank*divC*divR) for x in range(divC)] for y in range(divR)]
 
 # initInd = (N/2)+(N/2)*N
 initInd = T
-rankPos = (initInd / divR * divC) + (initInd % divR * divC == 0)
+rankPos = (initInd / (divR * divC)) + (initInd % (divR * divC) == 0)
 locIndJ = initInd % divC + (initInd % divC == 0)
 locIndI = (((initInd - (divC*divR) > 0 ) * (initInd - (divC*divR)) ) % divR ) + ((initInd - (divC*divR) <= 0 ) * (initInd) ) / divR
 print ("initInd is "+str(initInd)+" rankPos is "+str(rankPos)+" locIndI is "+str(locIndI)+" locIndJ is "+str(locIndJ))
